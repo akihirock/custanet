@@ -1,0 +1,177 @@
+.centered{
+    float: none;
+    margin: 0 auto;
+}
+
+
+#nickform{
+	margin-top:50px;
+}
+
+
+#username{
+	float:right;
+	position: relative;
+	display: block;
+	padding: 15px;
+	color: #fff;
+}
+
+
+
+@media ( min-width : 768px) {
+.navbar-collapse.navbar-ex1-collapse{
+	float:right;
+}
+}
+
+
+#left-pannel{
+	background-color: #f9f9f9;
+	width:225px;
+	padding:10px 15px;
+}
+
+#friendrequestsended{
+	display:none;
+	clear:both;
+}
+
+#allcnts{
+	margin-top:10px;
+}
+
+.navbar-inverse .navbar-brand {
+color: #fff;
+}
+
+#left-pannel-invitation{
+	background-color: #FFE0E0;
+	width: 225px;
+	padding: 10px 15px;
+}
+
+#left-pannel-friends{
+	margin-left:10px;
+}
+
+
+#left-pannel .form-group{
+	margin-bottom: 5px;
+}
+
+#left-pannel label{
+	margin:0;
+}
+
+
+.btn-sm{
+	padding: 3px 10px 2px 10px;
+}
+
+
+.input-sm{
+	height:25px;
+}
+
+#delete-btn,
+#invite-btn,
+#request-btn{
+	float: right;
+	margin-top:0;
+}
+
+#delete-btn{
+	display:none;
+}
+
+
+#main-pannel{
+	margin-top:20px;
+}
+
+#custanetTable tr td:first-child{
+	width:30px;
+	text-align:center;
+	padding-right: 1px;
+}
+
+#custanetTable tr.r td:first-child{
+	background-color: #FF9999;
+}
+
+#custanetTable tr.u td:first-child{
+	background-color: #1e90ff;
+}
+
+#custanetTable tr.f td:first-child{
+	background-color: #9f9;
+}
+
+#custanetTable tr td:last-child{
+	display:none;
+}
+
+#custanetTable a,
+#custanetTable a:hover{
+	text-decoration: none;
+	color:#333;
+}
+
+#custanetTable span.tag{
+	float:left;
+	display:table-cell;
+	overflow:hidden;
+	white-space: nowrap;
+	margin: 0 4px;
+	padding: 5px;	
+}
+
+
+#custanetTable span.txt{
+	color:#777;
+}
+
+#invitebtnmsg{
+	display:none;
+}
+
+#displayCount{
+	width: 80px;
+	float: right;
+}
+
+
+
+span.author,
+div.tag{
+	float: right;
+}
+
+div.pagetitle{
+	font-size: 14px;
+	margin: 2px 0;
+	float: left;
+}
+.ctnkey{
+	display:none;
+}
+
+body {
+	margin-top: 50px; /* 50px is the height of the navbar - change this if the navbarn height changes */
+}
+
+.thumb {
+	margin-bottom: 30px;
+}
+
+footer {
+	margin: 50px 0;
+}
+
+#loginbtn{
+	margin-top:50px;
+}
+
+
+

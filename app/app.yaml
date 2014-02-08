@@ -1,0 +1,77 @@
+application: custanets
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /css/(.*\.css)
+  static_files: css/\1
+  upload: css/(.*\.css)
+
+- url: /js/(.*\.(js|css|png))
+  static_files: js/\1
+  upload: js/(.*\.(js|css|png))
+
+- url: /static_dir/(.*\.(js|css|png))
+  static_files: static_dir/\1
+  upload: static_dir/(.*\.(js|css|png))
+
+
+- url: /bower_components/(.*)
+  static_files: bower_components/\1
+  upload: bower_components/(.*)
+
+- url: /font-awesome/(.*)
+  static_files: font-awesome/\1
+  upload: font-awesome/(.*)
+  
+  
+  
+- url: /styles/(.*\.css)
+  static_files: styles/\1
+  upload: styles/(.*\.css)
+
+- url: /styles/images/(.*\.(js|css|png))
+  static_files: styles/images/\1
+  upload: styles/images/(.*\.(js|css|png))
+
+
+- url: /scripts/(.*\.(js|css|png))
+  static_files: scripts/\1
+  upload: scripts/(.*\.(js|css|png))
+
+
+- url: /images/spin
+  static_dir: static_dir/spin
+
+- url: /images/spin/(.*)
+  static_files: static_dir/spin/\1
+  upload: static/spin/(.*)
+
+
+- url: /images/farb
+  static_dir: static_dir/farb
+
+- url: /images/farb/(.*)
+  static_files: static_dir/farb/\1
+  upload: static/farb/(.*)
+
+
+  
+
+
+- url: .*
+  script: main.app
+
+
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

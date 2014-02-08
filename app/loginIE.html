@@ -1,0 +1,44 @@
+<html>
+<head>
+   <script src="js/jquery.js"></script>
+   <script>
+	function getCookie(c_name){
+	    var st="";
+	    var ed="";
+	    if(document.cookie.length>0){
+	        st=document.cookie.indexOf(c_name + "=");
+	        if(st!=-1){
+	            st=st+c_name.length+1;
+	            ed=document.cookie.indexOf(";",st);
+	            if(ed==-1) ed=document.cookie.length;
+	            return unescape(document.cookie.substring(st,ed));
+	        }
+	    }
+	    return "";
+	}
+	
+	$(function(){
+		var c = getCookie('cuser');
+		if(c!=""){
+	        var custanet = {'ukey': c};    
+	        $.ajax({
+	            url: '/checkIE',
+	            type: "POST",
+	            data: custanet,
+	            success: function(result, textStatus, xhr) {
+					
+	            },
+	            error: function(xhr, textStatus, error) {
+	            
+	            }
+	        });
+		}
+	});
+	
+	
+	
+	
+	</script>
+</head>
+<body></body>
+</html>
