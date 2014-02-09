@@ -27,16 +27,22 @@
 		j.item(0).appendChild(a);
 		b.setAttribute('src',i+'jqueryui/1.10.0/jquery-ui.min.js');
 		j.item(0).appendChild(b);
+		
+		
 		a.onload=a.onreadystatechange=function(){
 			if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){
 				b.onload=b.onreadystatechange=function(){
 					if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){
 						if(!d){
+							
+							
 							var c=g.createElement('script');
 						    d=encodeURI(location.href);
 							c.src=debugStr + 'login?url='+d.replace("#","'''");
 							j.item(0).appendChild(c);
 							d=true;
+							
+							
 						}
 					}
 				};
