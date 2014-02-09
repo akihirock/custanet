@@ -1082,8 +1082,10 @@ function ctn() {
 					}
 				}	   	       
 	            
-	            
-	            cmenu(this,event,key);
+	            if (('createTouch' in document) || ('ontouchstarT' in document)) {
+			      cmenu(this,event,key);
+				}
+	           
 	            
 	            
 	        }
@@ -1286,8 +1288,9 @@ function ctn() {
 	            }
 	        }
 	        
-	        cmenu( $c(o) ,event, i);
-	        
+	        if (('createTouch' in document) || ('ontouchstarT' in document)) {
+			    cmenu( $c(o) ,event, i);
+			}
 	        
 	        
 	        var l = $c('#custanet-your-list');
