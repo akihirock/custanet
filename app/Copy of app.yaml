@@ -32,6 +32,7 @@ handlers:
   upload: font-awesome/(.*)
   
   
+  
 - url: /styles/(.*\.css)
   static_files: styles/\1
   upload: styles/(.*\.css)

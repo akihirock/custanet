@@ -23,7 +23,7 @@
 			
 			$("#ppn,#npn").remove();
 			
-			if( ( p != Math.ceil(ccnsLen/cnt))   ){
+			if( ( ccnsLen >0 && p != Math.ceil(ccnsLen/cnt))   ){
 				$(".pagination").append('<li id="npn"><a href="#">&raquo;</a></li>');
 			}
 			

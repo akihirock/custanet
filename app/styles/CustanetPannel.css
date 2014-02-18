@@ -1,3 +1,12 @@
+.custanet-not-saved-icon{
+font-size: 12px;
+background-color: #666;
+color: #fff;
+position: absolute;
+top: -20px;
+padding: 2px 4px;	
+}
+
 #custanet-result .menuclass *, 
 #custanet-result .menuclass *:before,
 #custanet-result .menuclass *:after {
@@ -32,6 +41,8 @@
 	padding:0px;
 	font: 11pt Verdana, Arial, Helvetica, sans-serif;
 	font-weight: 900;
+	background-color: #666;
+	color: #eee;
 }
 
 
@@ -146,12 +157,16 @@ div.custanet-simp-oth{
     margin-top:6px;
 }
 
+
+/*
 #custanet-read-msg,
 #custanet-write-msg{
 	font: 11.5pt Verdana, Arial, Helvetica, sans-serif;
 	margin:10px 0 0 2px;
 	color:#000;
 }
+*/
+
 #custanet-read-msg-c,
 #custanet-write-msg-c{
 	margin:4px;
@@ -1104,6 +1119,7 @@ input[name="custanet-list-cnt"]{
 	border:solid 2px #9999aa;
 	color:#000;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 #custanet-friend-text:focus {

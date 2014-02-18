@@ -30,6 +30,7 @@
 	background-color: #f9f9f9;
 	width:225px;
 	padding:10px 15px;
+	border-top: 1px solid #000;
 }
 
 #friendrequestsended{
@@ -86,10 +87,6 @@ color: #fff;
 }
 
 
-#main-pannel{
-	margin-top:20px;
-}
-
 #custanetTable tr td:first-child{
 	width:30px;
 	text-align:center;
@@ -139,6 +136,7 @@ color: #fff;
 #displayCount{
 	width: 80px;
 	float: right;
+	height:28px;
 }
 
 

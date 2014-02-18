@@ -550,21 +550,35 @@
 <br>
   <div id="custanet-other-text" style="overflow-x:hidden;overflow-y:auto;padding:2px;resize:none;border:solid 2px #9999aa;clear:both" ></div>
 </div>
+
+
 <div id="custanet-main-pannel">
   <iframe id="custanet_welcome_iframe" src="" style="display:none"></iframe>
   <div id ="custanet-div-logo"style="float:left;">CustaNet</div>
   <div>
-  <input id="custanet-main-pannel-m" type="button" value="+">
+  	<div id="custanet-main-pannel-m">-</div>
   </div>
   <div id ="custanet-command">
     <div id ="custanet-div-name">&emsp;</div>
     <span id ="custanet-name-key" style="display:none;"></span>
+
+    <!--
     <div style="height:10px;background-color:#333;margin-top:5px;">&emsp;</div>
     <div id="custanet-read-msg">
       <div style="float:left;">
         <span class="ui-icon ui-icon-circle-arrow-s"></span>
       </div>Read
     </div>
+    -->
+
+    <div id="custanet-write-msg-c">
+      <div id="custanet-msg-s-c">
+        <div class ="custanet-defaultItemBox">
+            <textarea id="custanet-friend-text" rows="4" ></textarea>
+        </div>
+      </div>
+    </div>
+    
     <div id="custanet-read-msg-c" >
       <div style="text-align:left; display: none;">&ensp;
       <input id="custanet-command-yours" type="checkbox" checked>&ensp;
@@ -582,47 +596,13 @@
         <div id="custanet-others-msgs" style="text-align:left"></div>
       </div>
     </div>
+    
+    <!--
     <div id="custanet-write-msg">
       <div style="float:left;">
         <span class="ui-icon ui-icon-circle-arrow-e"></span>
       </div>Write
     </div>
-    
-    
-    <div id="custanet-write-msg-c" style="display:none;">
- 
-      <div id="custanet-msg-s-c">
-        <!--
-        <div id = "custanet-tag-h">
-          <div id = "custanet-tag" style="float:left;font-size: 90%;margin-top:5px;">Tag:</div>&ensp;
-        <input type="button" id="custanet-select-tag" style="clear:both;" value="select tag">
-        </div>
-        <div id = "custanet-tag-s"></div>
-       
-        
-        <div id = "custanet-message-head">Message</div>
-         -->
-         
-         
-        <div class ="custanet-defaultItemBox">
-            <textarea id="custanet-friend-text" rows="4" ></textarea>
-        </div>
-        
-      </div>
-      
-      
-      <div id="custanet-msg-c-c">
-        <table id="custanet-your-list" style="table-layout: fixed;" width="100%">
-          <thead style="visibility:hidden;height:1px">
-            <tr style="height:1px">
-              <th width="20px;" style="height:1px"></th>
-              <th style="height:1px"></th>
-              <th width="30px;" style="height:1px"></th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      
-
-  </div>
+    -->
+     
 </div>

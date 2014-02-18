@@ -17,7 +17,7 @@ import webapp2
 from ccn import *
 import datetime
 from jinja2 import Environment, FileSystemLoader
-debugStr = "http://localhost:8080"
+debugStr = "http://localhost:11080"
 debugStr = "http://custanets.appspot.com"
 
 
@@ -440,16 +440,15 @@ class Set(webapp2.RequestHandler):
         self.response.headers['Access-Control-Allow-Headers'] = '*'
         self.response.headers['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS'
         self.response.headers['Content-Type'] = 'application/javascript;charset=UTF-8'        
-        
-         
+    
         url = self.request.get('url')
-        
         if url == "":
             self.response.write("NoUrl")
             return
 
         pw = self.request.get('pw')
         cuser = memcache.get(pw)  # @UndefinedVariable
+        
         
         if cuser == None:
             self.response.write("NoUser1")
@@ -467,7 +466,6 @@ class Set(webapp2.RequestHandler):
             #    tag=[];
             #logging.info("jooj")
             
-            
             ccns_keys=[]
             ccns = []
             
@@ -475,33 +473,19 @@ class Set(webapp2.RequestHandler):
                 c = json.loads(cn)
                 pubs = c["auth"]
                 usrs = []
+                usrs.append(cuser.key)
                 for p in pubs:
-                    usrs.append(cuser.key)
                     if p != "r" and p !="u" and p !="t":
-                        cuser = Cuser.get_by_id(p)
-                        usrs.append(cuser.key)
-                        
-                        
+                        fuser = Cuser.get_by_id(p)
+                        usrs.append(fuser.key)
                         pub = "f";
                     else: 
                         pub = p;  
                         
-                        
                 txt = c["txt"] 
-                
-                """
-                txt = txt.replace('\n','4')
-                txt = txt.replace('\r','5')
-                txt = txt.replace(('\r' or '\n'),'88')
-                txt = txt.replace('\r\n','00')
-                txt = txt.replace('<br>','11')
-                """
-                
                 txt = txt.replace('\r\n','<br>')
                 txt = txt.replace('\n','<br>')
                 txt = txt.replace('\r','<br>')                
-                
-                
                 
                 if "tag" in c:
                     tag = c["tag"] 
@@ -509,9 +493,13 @@ class Set(webapp2.RequestHandler):
                         tag=[];
                 else :
                      tag=[];
+                                    
+                logging.info("jooj")
+                logging.info(tag)
                                                              
                 if "css" in c :
                     css = c["css"]
+                    
                     if (len( str(c["key"]) )==10):
                         ccn = Ccn(url=curl.key,usr=usrs,txt=txt,css=css,pub=pub,tag=tag)
                         ccns.append(ccn)
@@ -519,6 +507,7 @@ class Set(webapp2.RequestHandler):
                     else:
                         ccn = Ccn.get_by_id(int(c["key"])) 
                         if ccn and ccn.usr[0] == cuser.key:
+                            logging.info( "jiijij")  
                             ccn.usr = usrs
                             ccn.pub = pub
                             ccn.txt = txt
@@ -526,6 +515,7 @@ class Set(webapp2.RequestHandler):
                             ccn.tag = tag       
                             ccns.append(ccn)
                             ccns_keys.append(c["key"])
+                            
                 else:
                     ccn = Ccn(url=curl.key,usr=usrs,txt=txt,pub=pub,tag=tag)
                     ccns.append(ccn)

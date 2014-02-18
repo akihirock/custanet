@@ -132,7 +132,7 @@ CurlTag=new Array();
 var constFlg=false;
 var debugStr;
 debugStr='http://custanets.appspot.com';
-//debugStr='http://localhost:8080';
+//debugStr='http://localhost:11080';
 
 
 
@@ -203,8 +203,6 @@ var checkCtag = function(obj){
 	       myCs[keyString].tag = CurlTag;
 	    }
 	};
-	
-	
 }
 
 $c("#custanet-tag-s").append(str).find("div").click(function(){
@@ -371,7 +369,7 @@ $c("#custanet-"+id+"-slider").slider({max:maxv,min:minv,value:parseInt(current[i
 slide:function(event,ui){current[id]=ui.value+deg;$c("#custanet-"+id+"-spin").val(ui.value);cssUpdates(current,id);}});}};
  
 function fonttableformat(current) {
-	$c("#custanet-font-size-spin").custanetSpinSlider(current,1000,0,1,"pt");
+	$c("#custanet-font-size-spin").custanetSpinSlider(current,100,0,1,"pt");
 	$c('#custanet-letter-spacing-spin').custanetSpinSlider(current,10,0,1,"pt");
 	$c('#custanet-word-spacing-spin').custanetSpinSlider(current,30,0,1,"pt");
 	$c('#custanet-line-height-spin').custanetSpinSlider(current,6,0.6,0.1,"em");
@@ -722,28 +720,48 @@ function ctn() {
 	var i;
 	var workcss;
 	h=$c('#custanet-main-pannel').height(),w=$c('#custanet-main-pannel').width();
-	$c('#custanet-main-pannel-m').click(function(){$c('#custanet-main-pannel').resizable({disabled:true}).css('opacity','1.0');if($c(this).val()=='+' ){h=$c('#custanet-main-pannel').height();w=$c('#custanet-main-pannel').width();$c('#custanet-command').css('display','none');$c(this).attr('value','-');$c('#custanet-main-pannel').height('10').width('150');}else{$c('#custanet-command').css('display','block');$c(this).attr('value','+');if($c('#custanet-read-msg-c').css('display')=='block'){$c('#custanet-main-pannel').resizable({disabled:false});}$c('#custanet-main-pannel').height(h).width(w);}$c('#custanet-main-pannel').height('');});
+
+	var custanetmainpannelt = 0;	
+	$c('#custanet-main-pannel-m').click(function () {
+	    $c('#custanet-main-pannel').resizable({
+	        disabled: true
+	    }).css('opacity', '1.0');
+	    if ($c(this).text() == '-') {
+	        h = $c('#custanet-main-pannel').height();
+	        w = $c('#custanet-main-pannel').width();
+	        $c('#custanet-command').css('display', 'none');
+	        $c(this).text('+');
+	        $c('#custanet-main-pannel').height('10').width('170');
+	    } else {
+	        $c('#custanet-command').css('display', 'block');
+	        $c(this).text('-');
+	        if ($c('#custanet-read-msg-c').css('display') == 'block') {
+	            $c('#custanet-main-pannel').resizable({
+	                disabled: false
+	            });
+	        }
+	        $c('#custanet-main-pannel').height(h).width(w);
+	    }
+	    $c('#custanet-main-pannel').height('');
+	});
 	
-	
-	
-	
-	
-	
-	
-	
-	var custanetmainpannelt = 0;
-	$c('#custanet-main-pannel').css('position','absolute').css('top',$c(window).scrollTop()).css('display','').css('z-index',Number(zPannel)+Number(baseZ)).draggable({cancel:'#custanet-others-msgs,#custanet-friend-text,#custanet-tag-s',stop:function(){custanetmainpannelt=$c(this).offset().top-(document.body.scrollTop||document.documentElement.scrollTop);}});
-	
-	$c('#custanet-main-pannel').resizable({
+	$c('#custanet-main-pannel').css({'position':'absolute','top':$c(window).scrollTop(),'display':'','z-index':Number(zPannel) + Number(baseZ)}).draggable({
+	    cancel: '#custanet-others-msgs,#custanet-friend-text,#custanet-tag-s',
+	    stop: function () {
+	        custanetmainpannelt = $c(this).offset().top - (document.body.scrollTop || document.documentElement.scrollTop);
+	    }
+	}).resizable({
 	    alsoResize: '#custanet-others-msgs',
-	    minHeight: 250,
+	    minHeight: 230,
+	    minWidth: 170,
+	    start: function (event, ui) {
+	        $c('#custanet-others-msgs').css("width","auto");
+	    },	    
 	    resize: function (event, ui) {
-	        $c('#custanet-friend-text').css('width', ui.size.width - 20 + 'px');
 	        $c('#custanet-others-msgs').css("width","auto");
 	    },
 	    stop: function (event, ui) {
 	        $c('#custanet-others-msgs').css("width","auto");
-	        $c("#custanet-friend-text").width($("#custanet-others-msgs").width())
 	    }
 	});
 	
@@ -786,58 +804,6 @@ function ctn() {
 	};	$c('#custanet-font-close,#custanet-area-close,#custanet-border-close,#custanet-property-close,#custanet-tag-close').click(function(e){var ob=$c(this).attr('id');ob=ob.replace('close','table');$c('#'+ob).css('display','none');$c.data($c('#'+ob).get(0),'dragFlg',false);e.stopImmediatePropagation();});
 	$c('#custanet-other-close').click(function(e){$c("#custanet-other-table").css('display','none');e.stopImmediatePropagation();});
 	
-	
-	$c('#custanet-read-msg,#custanet-write-msg').click(function () {
-	    $c('#custanet-main-pannel').css('opacity', '1.0');
-	    $c('#custanet-main-pannel').css('opacity', '1.0');
-	    var j = '#' + $c(this).attr('id') + '-c';
-	    if ($c(j).css('display') == 'none') {
-	        $c(j).css('display', 'block');
-	    } else {
-	        $c(j).css('display', 'none');
-	    }
-	    var i = $c("#custanet-read-msg-c");
-	    var j = $c("#custanet-write-msg-c");
-	    var k = i.attr('clientHeight') + j.attr('clientHeight');
-	    if (i.css('display') == 'block' && j.css('display') == 'block') {
-	        $c("#custanet-read-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-s');
-	        $c("#custanet-write-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-s');
-	        $c('#custanet-main-pannel').resizable({
-	            minHeight: 250 + j.attr('clientHeight')
-	        });
-	    } else if (i.css('display') == 'block' && j.css('display') == 'none') {
-	        $c("#custanet-read-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-s');
-	        $c("#custanet-write-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-e');
-	        $c('#custanet-main-pannel').resizable({
-	            minHeight: 250 + j.attr('clientHeight')
-	        });
-	    } else if (i.css('display') == 'none' && j.css('display') == 'block') {
-	        $c("#custanet-read-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-e');
-	        $c("#custanet-write-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-s');
-	    } else {
-	        $c("#custanet-read-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-e');
-	        $c("#custanet-write-msg").find('span').attr('class', 'ui-icon ui-icon-circle-arrow-e');
-	        $c('#custanet-main-pannel').resizable({
-	            minHeight: 180 + j.attr('clientHeight')
-	        });
-	    }
-	    i = $c('#custanet-read-msg-c').attr('clientHeight') + $c('#custanet-write-msg-c').attr('clientHeight');
-	    $c('#custanet-main-pannel').height(i + 120);
-	    $c('#custanet-main-pannel').height("");
-	    
-	    if($c("#custanet-others-msgs:visible").size()==1){
-	    	$c("#custanet-friend-text").width($c("#custanet-others-msgs").width());
-	    }
-	    
-	    
-	});
-	
-	
-	
-	
-		
-	
-	
 	$c('#custanet-command-yours').click(function () {
 	    if ($c(this).is(':checked')) {
 	        $c('div.custanet-simp-pri,div.custanet-cnt-pri').css('display', '');
@@ -879,8 +845,6 @@ function ctn() {
 
                 for (var keyString in myCs) {
                     if (myCs[keyString].isselected) {
-                        var j = $c('#custanet-your-list').find('input:checkbox[value^=' + i + ']');
-                        $c(j).attr('checked', false).parents('tr').children('td').css('background-color', 'white');
                         unSelect(myCs[keyString]);
                     }
                 }
@@ -902,8 +866,6 @@ function ctn() {
 		            }
 		            $c(that).css('top', ptop).css('left', pleft).css('border-color', pcolor);
 		            myCs[key].isselected = true;
-		            j = $c('#custanet-your-list').find("input:checkbox[value^=" + name + "]");
-		            $c(j).attr('checked', true).parents('tr').children('td').css('background-color', pcolor);
 		        }
 		        var menuint = true;
 		        for (var keyString in myCs) {
@@ -1011,32 +973,24 @@ function ctn() {
 	    this.currentcss = a;
 		
 		this.toMe = function(){
-				var me = {}; 
-				
+				var me = {};
 				var valstr = '';
-            	
             	//auth
                 me['auth'] =  this.auth.split(' ');
-	                
                 //twitter
                 me['tw'] = this.tw;
-	                
                 //key
                 me['key'] = this.key;
-	                            
 	             //css
 	            this.currentcss["bheight"] = $c('body').height();
 	            this.currentcss["bwidth"] = $c('body').width();
 				me['css'] = JSON.stringify(this.currentcss );
-	                
 	            //txt
 	            valstr = this.para.children('textarea').val();
 	            me['txt'] = valstr;
-	            
 	            //tag
 	            me['tag'] = this.tag;
 	            
-			
 				return JSON.stringify(me);
 		}
 	
@@ -1146,8 +1100,6 @@ function ctn() {
 	            if (!e.metaKey) {
 	                for (var keyString in myCs) {
 	                    if (myCs[keyString].isselected) {
-	                        var j = $c('#custanet-your-list').find('input:checkbox[value^=' + i + ']');
-	                        $c(j).attr('checked', false).parents('tr').children('td').css('background-color', 'white');
 	                        unSelect(myCs[keyString]);
 	                    }
 	                }
@@ -1168,8 +1120,6 @@ function ctn() {
 	                    pcolor = fric;
 	                }
 	                $c(this).css('top', parseInt(myCs[key].para.css('top')) - 20 + 'px').css('left', parseInt(myCs[key].para.css('left')) - 20 + 'px').css('border-color', pcolor);
-	                j = $c('#custanet-your-list').find("input[name='custanet-list-cnt'][value='" + key + "']");
-	                $c(j).prop("checked",true).parents('tr').children('td').css('background-color', pcolor);
 	                
 	                
 	                myCs[key].isselected = true;
@@ -1274,7 +1224,10 @@ function ctn() {
 	    },
 	    stop: function (event, ui) {
 	        var o = $c(ui.helper.get(0)).clone();
-	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox').css('position', 'absolute').css('opacity', '1.0').css('top', $c(ui.helper.get(0)).offset().top).css('left', $c(ui.helper.get(0)).offset().left);
+	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
+	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
+	        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
+
 	        $c('body:first').append($c(o));
 	        var i = randomStr();
 	        myCs[i] = new myD(i, $c(o));
@@ -1292,49 +1245,6 @@ function ctn() {
 			    cmenu( $c(o) ,event, i);
 			}
 	        
-	        
-	        var l = $c('#custanet-your-list');
-	        var y = l.append("<tr class='custanet-list-cnt'><td style='padding:0px;text-align:center;'><input type='checkbox' name='custanet-list-cnt' value='" + i + "'></td><td colspan='2' style='word-break:break-all;'><div class='custanet-list-div' style='white-space:nowrap;overflow:hidden;'>Write freely!!!</div></td></tr>").find("input:checkbox[value=" + i + "]").parents('tr');
-            var u = $c(y).find('div.custanet-list-div');
-            
-            $c(y).find("input").bind("click", function(e){
-		        m = myCs[$c(this).val()];
-		        n = m.para;
-		        if (m.isselected == true) {
-		            $c(this).prop('checked', false).parents('tr').find('td').css('background-color', 'white');
-		            unSelect(m);
-		        } else {
-		            n.css('border-width', '20px');
-		            n.width(myCs[i].para.children('textarea').outerWidth() + 0).height(n.children('textarea').outerHeight() + 0);
-		            if (m.isselected == false) {
-		                var pcolor;
-		                if (m.auth == 'r') {
-		                    pcolor = pric;
-		                } else if (m.auth == 'u') {
-		                    pcolor = pubc;
-		                } else {
-		                    pcolor = fric;
-		                }
-		                $c(n).css('top', parseInt(n.css('top')) - 20 + 'px').css('left', parseInt(n.css('left')) - 20 + 'px').css('border-color', pcolor);
-		                m.isselected = true;
-		                $c(e.target).prop('checked', true).parents('tr').find('td').css('background-color', pcolor);
-		            }
-		        }
-		    });
-	        
-	        
-	        if (l.find('tr').size() <= 2) {
-	            l.before("<div id='custanet-not-saved' style='text-align:left;'>custanet not to be saved</div>");
-	        }
-	        var htmlSanitize = function (r) {
-	            r = r.replace(/</g, "&lt;");
-	            r = r.replace(/>/g, "&gt;");
-	            return r;
-	        };
-	        $c(o).change(function () {
-	            var r = $c(myCs[i].para).children('textarea').val();
-	            $c(u).html(htmlSanitize(r));
-	        });
 	        $c('#custanet-main-pannel').height('');
 	
 	    }
@@ -1394,7 +1304,6 @@ function ctn() {
 		            }
 		        }
 		    });
-	        
 	        
 	        if (l.find('tr').size() <= 2) {
 	            l.before("<div id='custanet-not-saved' style='text-align:left;'>custanet not to be saved</div>");
@@ -1995,8 +1904,7 @@ function ctn() {
             'pw': pw,
             'browser': browser,
             'url': location.href,
-            'title':  document.title,
-        	'tag':JSON.stringify(CurlTag)
+            'title':  document.title
         }       
         
         if ($c("span.custanet-time:first").size() > 0) {
@@ -2005,25 +1913,17 @@ function ctn() {
         
         if(cflg){
         	//custanet
-        	
 	        var c = new Array();
 			for (var keyString in myCs) {
 	       		if (myCs[keyString].isselected) {
 	       			c.push( myCs[keyString].toMe() );
 	            }
 	        }
-	        
-	        //console.log(c);
-	        
 	        custanet['cns'] = c;
 	        
 		}else{			
 			//simple text
-
 			var me = {},cg = []; 
-
-        	//auth
-        	
   			var valstr = $c("input[name='custanet-ppy-pp']:checked").val();
         	if(valstr=="f"){
 	 	        $c("input.custanet-friend-send:checked").each(function () {
@@ -2031,23 +1931,23 @@ function ctn() {
 		        });
 		        valstr = cg;
         	}
-   
-			
-			
-			
 			me['auth'] =  valstr;
-                
             //twitter
 			if( $c("input[name='custanet-spl-tw']:checked").val() == "t" ){
 				me['tw'] = "true";
 			}
-                
             //txt
             me['txt'] = $c("#custanet-friend-text").val();
             $c("#custanet-friend-text").val("");
-		
+			//key
 			me['key'] = randomStr();		
-		
+			//tag
+			CurlTag = [];
+			$c("#custanet-tag-pp-s div.custanet-tag-active").each(function(){
+				CurlTag.push( $c(this).find("span").attr("class") );
+			});
+			me['tag'] = CurlTag;
+			
 			var c = new Array();
 			c.push( JSON.stringify(me) );
 
@@ -2140,7 +2040,10 @@ var custanet_show_func = function (resp, ba) {
 		}
 		
 	  	$c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pri").remove();
-	  	$c("span.custanet-key[value='" + cn.key + "']").parents("div.custanet-cnt-pri").remove();
+	  	$c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-fri").remove();
+	    $c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pub").remove();
+	  
+	  
 	  
 	    var tag="";
 	    for (t in cn.tag){
@@ -2148,7 +2051,8 @@ var custanet_show_func = function (resp, ba) {
 	    		tag += custanet_genre[cn.tag[t]] + " ";
 	    	}
 	    }
-	  
+	    
+	    
 	  	c += "<div class='" + wrk + "'>" + 
 	  		 "<div style='background-color:" + pc + "'>" + 
 	  		 "<span class='" + cntxt + "' style='float:left;height:15px;width:16px;'></span>" + tw + 
@@ -2202,14 +2106,18 @@ var custanet_show_func = function (resp, ba) {
       }
 	}
 
-    if (ba) {
-        $c(msgs).append(c);
-    } else {
-        $c(msgs).prepend(c);
-    }
+	    if (ba) {
+	        $c(msgs).append(c);
+	    } else {
+	        $c(msgs).prepend(c);
+	    }
+	
+	    if( $c("#custanet-others-msgs div").size()==0){
+	    	$c("#custanet-others-msgs").html("<div id='custanet-nopost'>no post</div>")
+	    }else{
+	    	$c("#custanet-nopost").remove();
+	    }  
 
-        
-        
         
         $c('#custanet-main-pannel').css('display', 'block');
        
