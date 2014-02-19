@@ -191,7 +191,20 @@
 		$("#delete-cn-btn").click(function(){
 	        var onSuccess = function (data, textStatus, jqXHR) 
 	        {
-				console.log(data);
+	        	data = JSON.parse(data);
+	        	for (var i=0,imax=data.length;i<imax;i++) {
+		        	for (var j=0,jmax=ccns.length;j<jmax;j++) {
+	        		　　if(ccns[j].key==data[i]){
+	        				ccns.splice(j, 1);
+	        				j=jmax+1;
+	        		　　}
+		        	}
+	        	}
+	        	
+	        	var scope = angular.element( $("#main-pannel") ).scope();
+	        	scope.$apply();
+	        	
+	        	
 	        };
 	        
 	        var cn = [];

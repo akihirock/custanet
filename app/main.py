@@ -311,7 +311,9 @@ class DeleteCn(webapp2.RequestHandler):
             ccn = Ccn.get_by_id(int(c))
             ckeys.append(ccn.key);
             
-        self.response.write(cids)    
+        ndb.delete_multi(ckeys)
+        
+        self.response.write( json.dumps(cids ) );
         
         
         
