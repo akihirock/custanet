@@ -291,6 +291,30 @@ class Delete(webapp2.RequestHandler):
         
         self.response.write(json.dumps(ret))
         
+        
+class DeleteCn(webapp2.RequestHandler):
+    def post(self):
+
+        cids = self.request.get_all('cid')
+
+        user = users.get_current_user()
+        
+        if user is None:
+            self.error(500)
+            return
+    
+        cuser = isCuser(user)
+
+        ckeys = []
+        for c in cids:
+            ckey = ndb.Key("Ccn",c)
+            ccn = Ccn.get_by_id(int(c))
+            ckeys.append(ccn.key);
+            
+        self.response.write(cids)    
+        
+        
+        
 class Login(webapp2.RequestHandler):
     def get(self):
 
@@ -562,5 +586,5 @@ class Test(webapp2.RequestHandler):
         
             
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),('/signin', Signin),('/login',Login),('/set',Set),('/loginIE.html',LoginIE),('/checkIE',CheckIE),('/request',Request),('/invite',Invite),('/delete',Delete),('/test',Test)
+    ('/', MainHandler),('/signin', Signin),('/login',Login),('/set',Set),('/loginIE.html',LoginIE),('/checkIE',CheckIE),('/request',Request),('/invite',Invite),('/delete',Delete),('/deleteCn',DeleteCn),('/test',Test)
 ], config=config,debug=True)

@@ -68,9 +68,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
           <ul class="nav navbar-nav side-nav">
-            <!-- <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>-->
             <li>      
-		     {% if ivts|length >0 %} 
+		     {% if ivts|length > 0 %} 
 		        <div id="left-pannel-invitation">
 		          <label>Invitation</label>
 		          <fieldset>
@@ -221,7 +220,7 @@
             <td>
                 {% if ccns|length >0 %} 
 			    <div style="float:left;padding: 4px;">
-			      <button id="request-btn" type="submit" class="btn btn-default btn-sm">Send Request</button>
+			      <button id="delete-cn-btn" type="submit" class="btn btn-default btn-sm" disabled="disabled">Delete</button>
 			    </div>
       			{% endif %} 
             </td>

@@ -170,8 +170,7 @@
 	        }).success(onSuccess);
 		});
 		
-		
-		
+			
 		$("#allcnts").click(function(){
 			if( $(this).is(':checked') ){
 				$("#custanetTable tbody td input:visible").prop("checked", true);
@@ -179,6 +178,30 @@
 				$("#custanetTable tbody td input:visible").prop("checked", false);
 			}
 		});
+		
+		
+		$("[name=custanet-list]").change(function(){
+			if($("[name=custanet-list]:checked").size()==0){
+				$("#delete-cn-btn").attr("disabled","disabled");
+			}else{
+				$("#delete-cn-btn").removeAttr("disabled");
+			}
+		});
+		
+		$("#delete-cn-btn").click(function(){
+	        var onSuccess = function (data, textStatus, jqXHR) 
+	        {
+				console.log(data);
+	        };
+	        
+	        var cn = [];
+	        $("[name=custanet-list]:checked").each(function(){
+	       		cn.push({name:"cid",value:$(this).val()});
+	        });
+	        $.ajax({
+	            url : '/deleteCn', type : 'post', data : cn
+	        }).success(onSuccess);
+		});		
 		
 		
 		
@@ -284,6 +307,11 @@
     			return false;
 			}  					
 		});	
+		
+		
+		
+		
+		
 		
 		
 	});  
