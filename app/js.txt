@@ -2058,7 +2058,7 @@ var custanet_show_func = function (resp, ba) {
 	  		 "<span class='custanet-time'>" + cn.dat + "</span><br>" + 
 	  		 "<span class='custanet-tag'>" + tag +  "</span>" + 
 	  		 "</div>" + 
-	  		 "<div style='word-break: break-all;margin-bottom:20px;'>" + cn.txt + "<br></div></div>";		  	
+	  		 "<div style='word-break: break-all;margin-bottom:20px;'>" + (cn.txt).replace(/<br>/g,"\r\n") + "<br></div></div>";		  	
 	  	
 		
 	   $c("input[name='custanet-list-cnt'][value='" + cn.wrk + "']").parents("tr").remove();

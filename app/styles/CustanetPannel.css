@@ -707,8 +707,8 @@ dl dd{
 dl dt.custanet-item-control-header{
 	background-color:#999;
 	color:#FFF;
-	width: 236px;
-	font-size: 130%;
+	width: 240px;
+	font-size: 14px;
 	height: 24px;
 	cursor:move;
 	border-radius: 8px 8px 0 0;
@@ -721,8 +721,8 @@ dl dt.custanet-item-control-header{
 dl dt.custanet-item-control-header-end{
 	background-color:#999;
 	color:#FFF;
-	width: 236px;
-	font-size: 130%;
+	width: 240px;
+	font-size: 14px;
 	height: 12px;
 	cursor:move;
 	border-radius:0 0 8px 8px;
