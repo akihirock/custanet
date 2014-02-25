@@ -314,8 +314,7 @@ class DeleteCn(webapp2.RequestHandler):
         ndb.delete_multi(ckeys)
         
         self.response.write( json.dumps(cids ) );
-        
-        
+          
         
 class Login(webapp2.RequestHandler):
     def get(self):

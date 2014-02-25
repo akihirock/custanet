@@ -2068,7 +2068,7 @@ var custanet_show_func = function (resp, ba) {
 	   }		 
 	  		 
 	  		 
-	  		 
+	
 	   if(cn.css!="" && cn.css != undefined){
 		  
 		  for (var keyString in myCs) {
