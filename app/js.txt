@@ -1982,15 +1982,24 @@ function ctn() {
 	
 var custanetShowCount=function(cpri,cpub,cfri,coth){if(cpri>0){$c("#custanet-yours-count").html(cpri).parent("div").css("display","");}else{$c("#custanet-yours-count").parent("div").css("display","none");}if(cfri>0){$c("#custanet-friends-count").html(cfri).parent("div").css("display","");}else{$c("#custanet-friends-count").parent("div").css("display","none");}if(coth+cpub>0){$c("#custanet-others-count").html(coth+cpub).parent("div").css("display","");}else{$c("#custanet-others-count").parent("div").css("display","none");}}
 
+var bwidth = $("body").width();
+var bheight = $("body").height();
 
 $c('#custanet-others-msgs').delegate('.custanet-cnt-pri,.custanet-cnt-pub,.custanet-cnt-fri','click',function(){
    var id = $c(this).find("span.custanet-key").attr("value");
    if( myCs[id].para.css("display") == "none" ){
 		myCs[id].para.css("display","block").click();
 		$c(this).addClass("active");
+		
+		if( myCs[id].bwidth != null ){
+			$("body").width(bwidth).height(bheight);
+		}
+		$("body")
+		
    }else{
 		myCs[id].para.css("display","none");
 		$c(this).removeClass("active");
+		$("body").width(bwidth).height(bheight);
    }
 });
 
@@ -2094,7 +2103,12 @@ var custanet_show_func = function (resp, ba) {
 	      }
 	      $c('body:first').append(b);
 	      myCs[cn.key] = new myD(cn.key, $c(b));
-	      myCs[cn.key].auth = cn.pub
+	      myCs[cn.key].auth = cn.pub;
+	      myCs[cn.key].bwidth = str["bwidth"];
+	      myCs[cn.key].bheight = str["bheight"];
+	      
+	      
+	      
 		  $c(b).addClass('custanet-itemBox');
 		  
 	   }
