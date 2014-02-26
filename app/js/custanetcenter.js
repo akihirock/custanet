@@ -1,13 +1,12 @@
 		$(function(){
 
-
 		var cnt = $("#displayCount").val();
 		
 		var cntFunc = function(cnt){
 			var str='';
 			if ( ccnsLen/cnt > 1 ){
 				for(var i=0,imax=ccnsLen/cnt;i<imax;i++){
-					str = str + '<li class="page" data-page="' +  (i+1) + '"><a href="#">' +  (i+1)  + '</a></li>';
+					str = str + '<li class="page" data-page="' +  (i+1) + '"><span>' +  (i+1)  + '</span></li>';
 				}
 				$(".pagination").html(str);
 			}
@@ -24,11 +23,11 @@
 			$("#ppn,#npn").remove();
 			
 			if( ( ccnsLen >0 && p != Math.ceil(ccnsLen/cnt))   ){
-				$(".pagination").append('<li id="npn"><a href="#">&raquo;</a></li>');
+				$(".pagination").append('<li id="npn"><span>&raquo;</span></li>');
 			}
 			
 			if( (p != 1) ){
-				$(".pagination").prepend('<li id="ppn"><a href="#">&laquo;</a></li>');
+				$(".pagination").prepend('<li id="ppn"><span>&laquo;</span></li>');
 			}
 		}
 		showPage(1);
@@ -57,7 +56,7 @@
 			$("ul.pagination").hide();
 		}else{
 			for(var i=1;i<Math.floor(ccnsLen/cnt);i++){
-				$("fpn").after('<li><a href="#">' + (i+1) + '</a></li>');
+				$("fpn").after('<li><span>' + (i+1) + '</span></li>');
 			}
 		}
 		

@@ -5,11 +5,15 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">My Project</a>
-    </div>
       <a class="navbar-brand" href="#">My Project</a>
     </div>
+      <a class="navbar-brand" href="#">My Project</a>
+(function(){
+    </div>
     <div class="navbar-collapse collapse" id="searchbar">
-
+      <a class="navbar-brand" href="#">My Project</a>
+      <a class="navbar-brand" href="#">My Project</a>
+      <a class="navbar-brand" href="#">My Project</a>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="about.html">About</a></li>
         <li id="userPage">
@@ -20,6 +24,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#" title="Start a new search">Clear</a></li>
       </ul>
+aaaa
+bbbbb
+ccccc
+dddd
 
 
 
