@@ -27,9 +27,9 @@ handlers:
  # upload: bower_components/(.*)
 
 
-- url: /font-awesome/(.*)
+- url: /font-awesome/(css|fonts)/(.*)
   static_files: font-awesome/\1
-  upload: font-awesome/(.*)
+  upload: font-awesome/(css|fonts)/(.*)
   
   
 - url: /styles/(.*\.css)
