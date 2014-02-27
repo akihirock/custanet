@@ -58,7 +58,7 @@
 
 
 <dl id="custanet-font-table" class="menuclass">
-  <dt class="custanet-item-control-header"><input id="custanet-border-default" type="button" value="Default">&emsp;Font Control<input id="custanet-font-close" type="button" value="x"></dt>
+  <dt class="custanet-item-control-header"><input id="custanet-font-default" type="button" value="Default">&emsp;Font Control<input id="custanet-font-close" type="button" value="x"></dt>
   <dd></dd>
   <dt>Size</dt>
   <dd>

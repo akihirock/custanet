@@ -112,11 +112,8 @@
 })(jQuery);
 
 
-
 var debugmsg;
-
 var friends,groups;
-
 var $c = jQuery.noConflict();
 
 $c(function() {
@@ -131,9 +128,7 @@ CurlTag=new Array();
 var constFlg=false;
 var debugStr;
 debugStr='http://custanets.appspot.com';
-//debugStr='http://localhost:11080';
-
-
+debugStr='http://localhost:11080';
 
 $c('#custanet-friend-text').css('background-color',pric);
 var getLargestZIndex=function(){var largestZIndex=0;var defaultView=document.defaultView;var func=function(tagname){var elems=document.getElementsByTagName(tagname),len=elems.length;for(var i=0;i<len;i++){var elem=elems[i];var zIndex=elem.style.zIndex;if(!zIndex){var css=elem.currentStyle||defaultView.getComputedStyle(elem,null);zIndex=css?css.zIndex:0;}zIndex -=0;if(largestZIndex<zIndex) largestZIndex=zIndex;}};if(arguments.length==0) func('*');else for(var i=0;i<arguments.length;i++) func(arguments[i]);return largestZIndex;};
@@ -1822,7 +1817,88 @@ function ctn() {
 	
 	
 	
-	$c('#custanet-font-default,#custanet-area-default,#custanet-border-default,#custanet-property-default').click(function(e){var custanet=[{'password':pw}];var workcss={};var a;var d;var t=$c(this);switch($c(this).attr('id')){case 'custanet-font-default':a=new Array('font-family','color','font-opacity','font-size','font-style','font-weight','text-decoration','letter-spacing','word-spacing','line-height','text-align','text-shadow-positonx','text-shadow-positony','text-shadow-blur','text-shadow','text-shadow-flg');custanet.push({'t':"f"});d=new Array($c("#custanet-font-family").val(),$c("#custanet-color").val(),$c("#custanet-font-opacity-spin").val(),$c("#custanet-font-size-spin").val()+"pt");if($c("#custanet-fontTypeface").val()=="Regular"){d.push("normal");d.push("400");}else if($c("#custanet-fontTypeface").val()=="Italic"){d.push("italic");d.push("400");}else if($c("#custanet-fontTypeface").val()=="Bold"){d.push("normal");d.push("700");}else{d.push("italic");d.push("700");}d.push($c("#custanet-text-decoration").val());d.push($c("#custanet-letter-spacing-spin").val()+"px");d.push($c("#custanet-word-spacing-spin").val()+"px");d.push($c("#custanet-line-height-spin").val()+"em");d.push($c("#custanet-text-align").val());d.push($c("#custanet-text-shadow-positonx-spin").val()+"px");d.push($c("#custanet-text-shadow-positony-spin").val()+"px");d.push($c("#custanet-text-shadow-blur-spin").val()+"px");d.push($c("#custanet-text-shadow").val());d.push($c("input[name='custanet-text-shadow-radio']:checked").val());break;case 'custanet-area-default':a=new Array('top','left','depth','height','width','background-color','background-opacity','padding','border-radius','box-shadow','box-shadow-flg','box-shadow-positonx','box-shadow-positony','box-shadow-blur');custanet.push({'t':"a"});d=new Array($c("#custanet-top-spin").val(),$c("#custanet-left-spin").val(),$c("#custanet-depth-spin").val(),$c("#custanet-height-spin").val()+"px",$c("#custanet-width-spin").val()+"px",$c("#custanet-background-color").val(),$c("#custanet-background-opacity-spin").val(),$c("#custanet-padding-spin").val()+"px",$c("#custanet-border-radius-spin").val()+"px",$c("#custanet-box-shadow").val(),$c("input[name='custanet-box-shadow-radio']:checked").val(),$c("#custanet-box-shadow-positonx-spin").val()+"px",$c("#custanet-box-shadow-positony-spin").val()+"px",$c("#custanet-box-shadow-blur-spin").val()+"px");break;case 'custanet-border-default':a=new Array('border-style','border-color','border-opacity','border-width');custanet.push({'t':"b"});d=new Array($c("#custanet-border-style").val(),$c("#custanet-border-color").val(),$c("#custanet-border-opacity-spin").val(),$c("#custanet-border-width-spin").val()+"px");break;case 'custanet-property-default':custanet.push({'t':"p"});break;};var valstr='';for(var i=0,max=d.length;i<max;i++){valstr=valstr+d[i]+"!";}valstr=valstr.slice(0,valstr.length-1);custanet.push({'d':valstr});valstr='';for(var i=0;i<custanet.length;i++){valstr=valstr+$c.param(custanet[i])+'&';};valstr=valstr.slice(0,valstr.length-1);$c.getJSON(debugStr+'/save?callback=?',valstr,function(resp,status){t.attr("value","defaulted!").fadeOut(3000);setTimeout(function(){t.attr("value","Set Default").css("display","");},7000);});e.stopImmediatePropagation();});
+	$c('#custanet-font-default,#custanet-area-default,#custanet-border-default,#custanet-property-default').click(function (e) {
+	    var custanet = [{
+	        'password': pw
+	    }];
+	    var workcss = {};
+	    var a;
+	    var d;
+	    var t = $c(this);
+	    switch ($c(this).attr('id')) {
+	    case 'custanet-font-default':
+	        a = new Array('font-family', 'color', 'font-opacity', 'font-size', 'font-style', 'font-weight', 'text-decoration', 'letter-spacing', 'word-spacing', 'line-height', 'text-align', 'text-shadow-positonx', 'text-shadow-positony', 'text-shadow-blur', 'text-shadow', 'text-shadow-flg');
+	        custanet.push({
+	            't': "f"
+	        });
+	        d = new Array($c("#custanet-font-family").val(), $c("#custanet-color").val(), $c("#custanet-font-opacity-spin").val(), $c("#custanet-font-size-spin").val() + "pt");
+	        if ($c("#custanet-fontTypeface").val() == "Regular") {
+	            d.push("normal");
+	            d.push("400");
+	        } else if ($c("#custanet-fontTypeface").val() == "Italic") {
+	            d.push("italic");
+	            d.push("400");
+	        } else if ($c("#custanet-fontTypeface").val() == "Bold") {
+	            d.push("normal");
+	            d.push("700");
+	        } else {
+	            d.push("italic");
+	            d.push("700");
+	        }
+	        d.push($c("#custanet-text-decoration").val());
+	        d.push($c("#custanet-letter-spacing-spin").val() + "px");
+	        d.push($c("#custanet-word-spacing-spin").val() + "px");
+	        d.push($c("#custanet-line-height-spin").val() + "em");
+	        d.push($c("#custanet-text-align").val());
+	        d.push($c("#custanet-text-shadow-positonx-spin").val() + "px");
+	        d.push($c("#custanet-text-shadow-positony-spin").val() + "px");
+	        d.push($c("#custanet-text-shadow-blur-spin").val() + "px");
+	        d.push($c("#custanet-text-shadow").val());
+	        d.push($c("input[name='custanet-text-shadow-radio']:checked").val());
+	        break;
+	    case 'custanet-area-default':
+	        a = new Array('top', 'left', 'depth', 'height', 'width', 'background-color', 'background-opacity', 'padding', 'border-radius', 'box-shadow', 'box-shadow-flg', 'box-shadow-positonx', 'box-shadow-positony', 'box-shadow-blur');
+	        custanet.push({
+	            't': "a"
+	        });
+	        d = new Array($c("#custanet-top-spin").val(), $c("#custanet-left-spin").val(), $c("#custanet-depth-spin").val(), $c("#custanet-height-spin").val() + "px", $c("#custanet-width-spin").val() + "px", $c("#custanet-background-color").val(), $c("#custanet-background-opacity-spin").val(), $c("#custanet-padding-spin").val() + "px", $c("#custanet-border-radius-spin").val() + "px", $c("#custanet-box-shadow").val(), $c("input[name='custanet-box-shadow-radio']:checked").val(), $c("#custanet-box-shadow-positonx-spin").val() + "px", $c("#custanet-box-shadow-positony-spin").val() + "px", $c("#custanet-box-shadow-blur-spin").val() + "px");
+	        break;
+	    case 'custanet-border-default':
+	        a = new Array('border-style', 'border-color', 'border-opacity', 'border-width');
+	        custanet.push({
+	            't': "b"
+	        });
+	        d = new Array($c("#custanet-border-style").val(), $c("#custanet-border-color").val(), $c("#custanet-border-opacity-spin").val(), $c("#custanet-border-width-spin").val() + "px");
+	        break;
+	    case 'custanet-property-default':
+	        custanet.push({
+	            't': "p"
+	        });
+	        break;
+	    };
+	    var valstr = '';
+	    for (var i = 0, max = d.length; i < max; i++) {
+	        valstr = valstr + d[i] + "!";
+	    }
+	    valstr = valstr.slice(0, valstr.length - 1);
+	    custanet.push({
+	        'd': valstr
+	    });
+	    valstr = '';
+	    for (var i = 0; i < custanet.length; i++) {
+	        valstr = valstr + $c.param(custanet[i]) + '&';
+	    };
+	    valstr = valstr.slice(0, valstr.length - 1);
+	    $c.getJSON(debugStr + '/save?callback=?', valstr, function (resp, status) {
+	        t.attr("value", "defaulted!").fadeOut(3000);
+	        setTimeout(function () {
+	            t.attr("value", "Set Default").css("display", "");
+	        }, 7000);
+	    });
+	    e.stopImmediatePropagation();
+	});
+	
+	
 	
 	$c('div.custanet-others-msg').on('click', function () {
 	    var i = $c(this).find('a').html();

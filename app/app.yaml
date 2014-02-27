@@ -21,16 +21,9 @@ handlers:
   static_files: static_dir/\1
   upload: static_dir/(.*\.(js|css|png))
 
-
- #- url: /bower_components/(.*)
- # static_files: bower_components/\1
- # upload: bower_components/(.*)
-
-
-- url: /font-awesome/(css|fonts)/(.*)
+- url: /font-awesome/(.*)
   static_files: font-awesome/\1
-  upload: font-awesome/(css|fonts)/(.*)
-  
+  upload: font-awesome/(css|fonts)/(.*) 
   
 - url: /styles/(.*\.css)
   static_files: styles/\1
@@ -40,26 +33,17 @@ handlers:
   static_files: styles/images/\1
   upload: styles/images/(.*\.(js|css|png))
 
-
-- url: /scripts/(.*\.(js|css|png))
-  static_files: scripts/\1
-  upload: scripts/(.*\.(js|css|png))
-
-
-- url: /images/spin
-  static_dir: static_dir/spin
-
 - url: /images/spin/(.*)
   static_files: static_dir/spin/\1
   upload: static/spin/(.*)
 
-
-- url: /images/farb
-  static_dir: static_dir/farb
-
 - url: /images/farb/(.*)
   static_files: static_dir/farb/\1
   upload: static/farb/(.*)
+
+- url: /aio/(.*)
+  static_files: aki/\1
+  upload: aki/(.*)
 
 
 - url: .*
