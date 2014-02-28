@@ -1212,6 +1212,7 @@ function ctn() {
 	        $c(ui.helper.get(0)).html(a);
 	    },
 	    stop: function (event, ui) {
+	    /*
 	        var o = $c(ui.helper.get(0)).clone();
 	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
 	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
@@ -1235,12 +1236,55 @@ function ctn() {
 			}
 	        
 	        $c('#custanet-main-pannel').height('');
-	
+			*/
 	    }
 	}).click(function (e) {
 		$c(this).find("textarea").focus();
 	});
 
+	
+	 $c('*').droppable({
+	 	greedy : true,
+        accept: '.ui-draggable',
+        drop: function(event, ui) {
+            console.log( $c(this).get(0)  );
+            //console.log(  $c( $c(this).get(0) ).get(0)  );
+	        
+	        var o = $c(ui.helper.get(0)).clone();
+	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
+	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
+	        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
+
+	        $c('body:first').append($c(o));
+	        var i = randomStr();
+	        myCs[i] = new myD(i, $c(o));
+	        var j = 0;
+			for( key in myCs ){ j++; } 
+	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j);
+	        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
+	        for (var keyString in myCs) {
+	            if (myCs[keyString].isselected) {
+	                unSelect(myCs[keyString]);
+	            }
+	        }
+	        
+	        if (('createTouch' in document) || ('ontouchstarT' in document)) {
+			    cmenu( $c(o) ,event, i);
+			}
+	        
+	        $c('#custanet-main-pannel').height('');
+	        
+        }
+    });
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/*
 	$c('div.custanet-defaultItemBox').draggable({
