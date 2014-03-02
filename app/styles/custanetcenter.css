@@ -5967,6 +5967,11 @@ td.visible-print {
   margin: 0;
 }
 /*# sourceMappingURL=/styles/main.css.map */
+#left-pannel-request,
+#left-pannel-pub{
+	display:none;
+}
+
 .centered{
     float: none;
     margin: 0 auto;
@@ -6067,7 +6072,7 @@ color: #fff;
 }
 
 #custanetTable tr.u td:first-child{
-	background-color: #1e90ff;
+	background-color: #F0F8FF;
 }
 
 #custanetTable tr.f td:first-child{

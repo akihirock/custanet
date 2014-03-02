@@ -173,8 +173,10 @@
 		$("#allcnts").click(function(){
 			if( $(this).is(':checked') ){
 				$("#custanetTable tbody td input:visible").prop("checked", true);
+				$("#delete-cn-btn").removeAttr("disabled");
 			}else{
 				$("#custanetTable tbody td input:visible").prop("checked", false);
+				$("#delete-cn-btn").attr("disabled","disabled");
 			}
 		});
 		

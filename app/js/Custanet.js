@@ -1,7 +1,7 @@
 (function(){
 	var debugStr;
 	debugStr = 'http://custanets.appspot.com/';
-	debugStr = 'http://localhost:11080/';
+	//debugStr = 'http://localhost:11080/';
 
 	var g=window.document,
 		a=g.createElement('script'),

@@ -120,7 +120,7 @@ $c(function() {
 function hookXhr(){var xhr=function(){this.readyState=0;this.responseText='';this.status='';this.onreadstatechange=undefined;var xdr=new XDomainRequest();xdr.onprogress=function(){var f;this.xhr.readyState=2;if(this.xhr &&(f=this.xhr.onreadystatechange ) ){f.apply(this.xhr );}};xdr.onload=function(){var f;this.xhr.readyState=3;if(this.xhr &&(f=this.xhr.onreadystatechange ) ){f.apply(this.xhr );}this.xhr.responseText=xdr.responseText;this.xhr.readyState=4;this.xhr.status='200';if(f ){f.apply(this.xhr );}};this.open=function(method,url,async ){return xdr.open(method,url,async );readyState=1;};this.send=function(body ){xdr.send(body );};this.setRequestHeader=function(headerName,headerValue ){};this.getResponseHeader=function(headerName ){if(headerName.match(/^Content\-Type$c/i ) ){return xdr.contentType;}else{return '';}};xdr.xhr=this;return this;};return new xhr();};
 Array.prototype.contains = function(value) {for(var i in this) {if( this.hasOwnProperty(i) && this[i] === value) {return true;}}return false;}
 var custanetmenu = 0,custanetfonttbl = 0,custanetareatbl = 0,custanetbordertbl = 0,custanetprptbl = 0,custanettagtbl = 0,custanetothertbl = 0;	
-var zPannel=10000,zList=20000,zTable=30000,zDrag=40000,pubc='#1e90ff',pric='#f99',fric='#9f9',twc='#9AE4E8',browser,
+var zPannel=10000,zList=20000,zTable=30000,zDrag=40000,pubc='#E6E6FA',pric='#f99',fric='#9f9',twc='#9AE4E8',browser,
 items=new Array(),
 oitems=new Array(),
 myCs = {},
@@ -128,9 +128,10 @@ CurlTag=new Array();
 var constFlg=false;
 var debugStr;
 debugStr='http://custanets.appspot.com';
-debugStr='http://localhost:11080';
+//debugStr='http://localhost:11080';
 
-$c('#custanet-friend-text').css('background-color',pric);
+$c('#custanet-friend-text').css('background-color',pubc);
+
 var getLargestZIndex=function(){var largestZIndex=0;var defaultView=document.defaultView;var func=function(tagname){var elems=document.getElementsByTagName(tagname),len=elems.length;for(var i=0;i<len;i++){var elem=elems[i];var zIndex=elem.style.zIndex;if(!zIndex){var css=elem.currentStyle||defaultView.getComputedStyle(elem,null);zIndex=css?css.zIndex:0;}zIndex -=0;if(largestZIndex<zIndex) largestZIndex=zIndex;}};if(arguments.length==0) func('*');else for(var i=0;i<arguments.length;i++) func(arguments[i]);return largestZIndex;};
 var baseZ = getLargestZIndex();
 
@@ -952,7 +953,7 @@ function ctn() {
 	    this.para = para;
 	    this.cid = '';
 	    this.isselected = false;
-	    this.auth = 'r';
+	    this.auth = 'u';
 	    this.tag = '';
 	    this.tw = false;
 	    var a = {};
@@ -1212,7 +1213,6 @@ function ctn() {
 	        $c(ui.helper.get(0)).html(a);
 	    },
 	    stop: function (event, ui) {
-	    /*
 	        var o = $c(ui.helper.get(0)).clone();
 	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
 	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
@@ -1236,13 +1236,12 @@ function ctn() {
 			}
 	        
 	        $c('#custanet-main-pannel').height('');
-			*/
 	    }
 	}).click(function (e) {
 		$c(this).find("textarea").focus();
 	});
 
-	
+	/*
 	 $c('*').droppable({
 	 	greedy : true,
         accept: '.ui-draggable',
@@ -1276,15 +1275,7 @@ function ctn() {
 	        
         }
     });
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	*/
 	
 	/*
 	$c('div.custanet-defaultItemBox').draggable({
@@ -2100,8 +2091,7 @@ function ctn() {
 	
 var custanetShowCount=function(cpri,cpub,cfri,coth){if(cpri>0){$c("#custanet-yours-count").html(cpri).parent("div").css("display","");}else{$c("#custanet-yours-count").parent("div").css("display","none");}if(cfri>0){$c("#custanet-friends-count").html(cfri).parent("div").css("display","");}else{$c("#custanet-friends-count").parent("div").css("display","none");}if(coth+cpub>0){$c("#custanet-others-count").html(coth+cpub).parent("div").css("display","");}else{$c("#custanet-others-count").parent("div").css("display","none");}}
 
-var bwidth = $("body").width();
-var bheight = $("body").height();
+var bwidth,bheight;
 
 $c('#custanet-others-msgs').delegate('.custanet-cnt-pri,.custanet-cnt-pub,.custanet-cnt-fri','click',function(){
    var id = $c(this).find("span.custanet-key").attr("value");
@@ -2110,14 +2100,13 @@ $c('#custanet-others-msgs').delegate('.custanet-cnt-pri,.custanet-cnt-pub,.custa
 		$c(this).addClass("active");
 		
 		if( myCs[id].bwidth != null ){
-			$("body").width(bwidth).height(bheight);
+			$c("body").width(myCs[id].bwidth).height(myCs[id].bheight);
 		}
-		$("body")
 		
    }else{
 		myCs[id].para.css("display","none");
 		$c(this).removeClass("active");
-		$("body").width(bwidth).height(bheight);
+		$c("body").css({"width":"auto","height":"auto"});
    }
 });
 

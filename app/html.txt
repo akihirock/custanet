@@ -2,9 +2,11 @@
   <li>
     <span id="custanet-menu-save" href="#">&#8194;SAVE</span>
   </li>
+  <!--
   <li>
     <span id="custanet-menu-property" href="#">&#8194;Property</span>
   </li>
+  -->
   <li>
     <span id="custanet-menu-tag" href="#">&#8194;Tag</span>
   </li>
@@ -31,8 +33,8 @@
   <dt style="height: 42px;">Publicity</dt>
   <dd style="height: 43px;">
     <div>
-		<span style="float:left;width:80px;margin:4px auto;"><input class="custanet-ppy-pri" type="radio" name="custanet-ppy-pp" value="r" checked>private</span>
-		<span style="float:left;width:80px;margin:4px auto;"><input class="custanet-ppy-pub" type="radio" name="custanet-ppy-pp" value="u">public</span>
+		<span style="float:left;width:80px;margin:4px auto;"><input class="custanet-ppy-pri" type="radio" name="custanet-ppy-pp" value="r">private</span>
+		<span style="float:left;width:80px;margin:4px auto;"><input class="custanet-ppy-pub" type="radio" name="custanet-ppy-pp" value="u" checked>public</span>
 		<span style="float:left;width:80px;margin:4px auto;"><input class="custanet-ppy-fri" type="radio" name="custanet-ppy-pp" value="f">friend</span>
     </div>		
   </dd>
@@ -58,7 +60,7 @@
 
 
 <dl id="custanet-font-table" class="menuclass">
-  <dt class="custanet-item-control-header"><input id="custanet-font-default" type="button" value="Default">&emsp;Font Control<input id="custanet-font-close" type="button" value="x"></dt>
+  <dt class="custanet-item-control-header"><input id="custanet-border-default" type="button" value="Default">&emsp;Font Control<input id="custanet-font-close" type="button" value="x"></dt>
   <dd></dd>
   <dt>Size</dt>
   <dd>
