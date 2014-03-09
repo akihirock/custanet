@@ -127,7 +127,7 @@ myCs = {},
 CurlTag=new Array();
 var constFlg=false;
 var debugStr;
-debugStr='http://custanets.appspot.com';
+debugStr='https://custanets.appspot.com';
 //debugStr='http://localhost:11080';
 
 $c('#custanet-friend-text').css('background-color',pubc);
