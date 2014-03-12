@@ -23,12 +23,23 @@
 		h.width='100%';
 		
 		document.body.appendChild(e);
+		
+		/*
 		a.setAttribute('src',i+'jquery/1.9.0/jquery.min.js');
 		j.item(0).appendChild(a);
 		b.setAttribute('src',i+'jqueryui/1.10.0/jquery-ui.min.js');
 		j.item(0).appendChild(b);
+		*/
+		
+		var c=g.createElement('script');
+	    d=encodeURI(location.href);
+		c.src=debugStr + 'login?url='+d.replace("#","'''");
+		j.item(0).appendChild(c);
+		d=true;
 		
 		
+		
+		/*
 		a.onload=a.onreadystatechange=function(){
 			if(!this.readyState||this.readyState=='loaded'||this.readyState=='complete'){
 				b.onload=b.onreadystatechange=function(){
@@ -48,5 +59,6 @@
 				};
 			}
 		};
+		*/
 	}
 )();

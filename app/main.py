@@ -387,6 +387,12 @@ var custanetLoading = document.getElementById('custanet-loading');
 custanetLoading.innerHTML="";
 var custanetA = document.createElement('a');
 custanetA.appendChild(document.createTextNode('Please login Custanet.'));
+custanetA.style.color="blue";
+custanetA.style.textDecoration="none";
+var deleteMe = function(){
+    document.body.removeChild(custanetLoading); 
+}
+custanetA.addEventListener('click', deleteMe, false);
 """
             str += "custanetA.href='" + debugStr + "';custanetA.target = 'blank';custanetLoading.appendChild(custanetA);"
             #self.response.write("alert('no user');var custanetLoading=document.getElementById('custanet-loading');custanetLoading.parentNode.removeChild(custanetLoading);var a = document.createElement('a');a.appendChild(document.createTextNode('Please login Custanet'));a.href = 'http://custanets.appspot.com/';a.target = 'blank';document.getElementById('custanet-loading').appendChild(a);")
@@ -432,6 +438,23 @@ custanetA.appendChild(document.createTextNode('Please login Custanet.'));
             str += "objBody.appendChild(element);\r\n"
             str += "var pw='" + pw + "';\r\n"
             str += "var view = document.getElementById('custanet-result');\r\n"
+            
+            f = open('jquery.js')
+            lines2 = f.readlines()
+            f.close()   
+            allline = ""
+            for line in lines2:
+                allline += line.rstrip()
+            str+=allline
+            
+            f = open('jqueryui.js')
+            lines2 = f.readlines()
+            f.close()
+            allline = ""
+            for line in lines2:
+                allline += line.rstrip()
+            str+=allline
+
             
             f = open('html.min.txt')
             lines2 = f.readlines()

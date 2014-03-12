@@ -1184,6 +1184,7 @@ function ctn() {
 	        value = str['box-shadow'] + ' ' + str['box-shadow-positonx'] + ' ' + str['box-shadow-positony'] + ' ' + str['box-shadow-blur'];
 	        str['-moz-box-shadow'] = value;
 	        str['-webkit-box-shadow'] = value;
+	        str['box-shadow'] = value;
 	        value = hexUnpack(str['border-color']);
 	        value = 'rgba(' + value[0] * 255 + ',' + value[1] * 255 + ',' + value[2] * 255 + ',' + str['border-opacity'] / 100 + ')';
 	        str['border-color'] = value;
