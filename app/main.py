@@ -21,6 +21,7 @@ debugStr = "http://localhost:11080"
 debugStr = "https://custanets.appspot.com"
 
 
+
 def timeJST (value):
     return (value + datetime.timedelta(hours=9)).strftime('%m/%d %H:%M:%S').decode('utf-8')
 
