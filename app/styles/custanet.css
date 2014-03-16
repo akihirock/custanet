@@ -606,14 +606,23 @@ padding: 2px 4px;
 #custanet-border-close,
 #custanet-property-close,
 #custanet-tag-close{
-   width:20px;
-   font: 11px Verdana, Arial, Helvetica, sans-serif;
-   color:#222;
-   padding:0px;
-   float: right;
-   margin: 0 5px;
-   padding:0;
-   text-align:center;   
+   
+   
+	width: 18px;
+	height: 18px;
+	background-color: #eee;
+	font: 11px Verdana,Arial,Helvetica,sans-serif;
+	color: #222;
+	padding: 0;
+	float: right;
+	display: block;
+	margin: 0 5px;
+	padding: 2px 0 0 0;
+	border-radius: 2px;
+	text-align: center;   
+    cursor:pointer;
+   
+     
 }
 
 
@@ -667,9 +676,6 @@ margin-right: 10px;
 }
 
 dl {
-	/*
-	border: 1px solid #AAA;
-	*/
 	font: bold 10.5px Verdana, Arial, Helvetica, sans-serif;
 	text-align: left;
 	width: 240px;
@@ -681,7 +687,7 @@ dl dt{
 	border-top: 1px solid #AAA;
 	*/
 	clear: both;
-	padding-top:4px;
+	padding-top:2px;
 	padding-left:4px;
 	background-color: #DDD;
 	height: 22px;
@@ -698,7 +704,7 @@ dl dd{
 	*/
 	padding-left: 10px;
 	height: 22px;
-	padding-top: 2px;
+	padding-top: 4px;
 	padding-bottom: 1px;
 	background-color:#EEE;
 	color:#666;
@@ -718,6 +724,7 @@ dl dt.custanet-item-control-header{
 	-webkit-border-radius: 8px 8px 0 0;
 	-o-border-radius: 8px 8px 0 0;
 	-ms-border-radius: 8px 8px 0 0;
+	padding-top:6px;
 }
 
 dl dt.custanet-item-control-header-end{
@@ -1124,7 +1131,6 @@ input[name="custanet-list-cnt"]{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	
 }
 
 #custanet-friend-text:focus {

@@ -1854,83 +1854,86 @@ function ctn() {
 	
 	
 	$c('#custanet-font-default,#custanet-area-default,#custanet-border-default,#custanet-property-default').click(function (e) {
-	    var custanet = [{
-	        'password': pw
-	    }];
-	    var workcss = {};
-	    var a;
-	    var d;
-	    var t = $c(this);
+         var custanet = 
+        {
+            'action': "default",
+            'pw': pw,
+            'url': location.href
+        }    	   
+	    var css = {};
 	    switch ($c(this).attr('id')) {
-	    case 'custanet-font-default':
-	        a = new Array('font-family', 'color', 'font-opacity', 'font-size', 'font-style', 'font-weight', 'text-decoration', 'letter-spacing', 'word-spacing', 'line-height', 'text-align', 'text-shadow-positonx', 'text-shadow-positony', 'text-shadow-blur', 'text-shadow', 'text-shadow-flg');
-	        custanet.push({
-	            't': "f"
-	        });
-	        d = new Array($c("#custanet-font-family").val(), $c("#custanet-color").val(), $c("#custanet-font-opacity-spin").val(), $c("#custanet-font-size-spin").val() + "pt");
-	        if ($c("#custanet-fontTypeface").val() == "Regular") {
-	            d.push("normal");
-	            d.push("400");
-	        } else if ($c("#custanet-fontTypeface").val() == "Italic") {
-	            d.push("italic");
-	            d.push("400");
-	        } else if ($c("#custanet-fontTypeface").val() == "Bold") {
-	            d.push("normal");
-	            d.push("700");
-	        } else {
-	            d.push("italic");
-	            d.push("700");
-	        }
-	        d.push($c("#custanet-text-decoration").val());
-	        d.push($c("#custanet-letter-spacing-spin").val() + "px");
-	        d.push($c("#custanet-word-spacing-spin").val() + "px");
-	        d.push($c("#custanet-line-height-spin").val() + "em");
-	        d.push($c("#custanet-text-align").val());
-	        d.push($c("#custanet-text-shadow-positonx-spin").val() + "px");
-	        d.push($c("#custanet-text-shadow-positony-spin").val() + "px");
-	        d.push($c("#custanet-text-shadow-blur-spin").val() + "px");
-	        d.push($c("#custanet-text-shadow").val());
-	        d.push($c("input[name='custanet-text-shadow-radio']:checked").val());
-	        break;
-	    case 'custanet-area-default':
-	        a = new Array('top', 'left', 'depth', 'height', 'width', 'background-color', 'background-opacity', 'padding', 'border-radius', 'box-shadow', 'box-shadow-flg', 'box-shadow-positonx', 'box-shadow-positony', 'box-shadow-blur');
-	        custanet.push({
-	            't': "a"
-	        });
-	        d = new Array($c("#custanet-top-spin").val(), $c("#custanet-left-spin").val(), $c("#custanet-depth-spin").val(), $c("#custanet-height-spin").val() + "px", $c("#custanet-width-spin").val() + "px", $c("#custanet-background-color").val(), $c("#custanet-background-opacity-spin").val(), $c("#custanet-padding-spin").val() + "px", $c("#custanet-border-radius-spin").val() + "px", $c("#custanet-box-shadow").val(), $c("input[name='custanet-box-shadow-radio']:checked").val(), $c("#custanet-box-shadow-positonx-spin").val() + "px", $c("#custanet-box-shadow-positony-spin").val() + "px", $c("#custanet-box-shadow-blur-spin").val() + "px");
-	        break;
-	    case 'custanet-border-default':
-	        a = new Array('border-style', 'border-color', 'border-opacity', 'border-width');
-	        custanet.push({
-	            't': "b"
-	        });
-	        d = new Array($c("#custanet-border-style").val(), $c("#custanet-border-color").val(), $c("#custanet-border-opacity-spin").val(), $c("#custanet-border-width-spin").val() + "px");
-	        break;
-	    case 'custanet-property-default':
-	        custanet.push({
-	            't': "p"
-	        });
-	        break;
+		    case 'custanet-font-default':
+		        css['font-family'] = $c("#custanet-font-family").val();
+		        css['color'] = $c("#custanet-color").val();
+		        css['font-opacity'] = $c("#custanet-font-opacity-spin").val();
+		        css['font-size'] = $c("#custanet-font-size-spin").val() + "pt";
+		        if ($c("#custanet-fontTypeface").val() == "Regular") {
+		            css['font-style'] = "normal";
+		            css['font-weight'] = "400";
+		        } else if ($c("#custanet-fontTypeface").val() == "Italic") {
+		            css['font-style'] = "italic";
+		            css['font-weight'] = "400";
+		        } else if ($c("#custanet-fontTypeface").val() == "Bold") {
+		            css['font-style'] = "normal";
+		            css['font-weight'] = "700";
+		        } else {
+		            css['font-style'] = "italic";
+		            css['font-weight'] = "700";
+		        }
+		        css['text-decoration'] = $c("#custanet-text-decoration").val();
+		        css['letter-spacing'] = $c("#custanet-letter-spacing-spin").val() + "px";
+		        css['word-spacing'] = $c("#custanet-word-spacing-spin").val() + "px";
+		        css['line-height'] = $c("#custanet-line-height-spin").val() + "em";
+		        css['text-align'] = $c("#custanet-text-align").val();
+		        css['text-shadow-positonx'] = $c("#custanet-text-shadow-positonx-spin").val() + "px";
+		        css['text-shadow-positony'] = $c("#custanet-text-shadow-positony-spin").val() + "px";
+		        css['text-shadow-blur'] = $c("#custanet-text-shadow-blur-spin").val() + "px";
+		        css['text-shadow'] = $c("#custanet-text-shadow").val();
+		        css['text-shadow-flg'] = $c("input[name='custanet-text-shadow-radio']:checked").val();
+		        break;
+		    case 'custanet-area-default':
+		    	/*
+		        css['top'] = $c("#custanet-top-spin").val();
+		        css['left'] = $c("#custanet-left-spin").val();
+		        */
+		        css['depth'] = $c("#custanet-depth-spin").val();
+		        css['height'] = $c("#custanet-height-spin").val() + "px";
+		        css['width'] = $c("#custanet-width-spin").val() + "px";
+		        css['background-color'] = $c("#custanet-background-color").val();
+		        css['background-opacity'] = $c("#custanet-background-opacity-spin").val();
+		        css['padding'] = $c("#custanet-padding-spin").val() + "px";
+		        css['border-radius'] = $c("#custanet-border-radius-spin").val() + "px";
+		        css['box-shadow'] = $c("#custanet-box-shadow").val();
+		        css['box-shadow-flg'] = $c("input[name='custanet-box-shadow-radio']:checked").val();
+		        css['box-shadow-positonx'] = $c("#custanet-box-shadow-positonx-spin").val() + "px"; 
+		        css['box-shadow-positony'] = $c("#custanet-box-shadow-positony-spin").val() + "px"; 
+		        css['box-shadow-blur'] = $c("#custanet-box-shadow-blur-spin").val() + "px";
+		        break;
+		    case 'custanet-border-default':
+		    	css['border-style'] = $c("#custanet-border-style").val();	
+		    	css['border-color'] = $c("#custanet-border-color").val();
+		    	css['border-opacity'] = $c("#custanet-border-opacity-spin").val();
+		    	css['border-width'] = $c("#custanet-border-width-spin").val() + "px";
+		        break;
+		    case 'custanet-property-default':
 	    };
-	    var valstr = '';
-	    for (var i = 0, max = d.length; i < max; i++) {
-	        valstr = valstr + d[i] + "!";
-	    }
-	    valstr = valstr.slice(0, valstr.length - 1);
-	    custanet.push({
-	        'd': valstr
-	    });
-	    valstr = '';
-	    for (var i = 0; i < custanet.length; i++) {
-	        valstr = valstr + $c.param(custanet[i]) + '&';
-	    };
-	    valstr = valstr.slice(0, valstr.length - 1);
-	    $c.getJSON(debugStr + '/save?callback=?', valstr, function (resp, status) {
-	        t.attr("value", "defaulted!").fadeOut(3000);
-	        setTimeout(function () {
-	            t.attr("value", "Set Default").css("display", "");
-	        }, 7000);
-	    });
+	    
+		custanet['css'] = JSON.stringify(css);
+	    
+        $c.ajax({
+            url: debugStr + '/set',
+            type: "POST",
+            data: custanet,
+            success: function(result, textStatus, xhr) {
+            	result = result.replace(/'/g,"")
+            	defaultCss = jQuery.parseJSON(result);
+            },
+            error: function(xhr, textStatus, error) {
+            	
+            }
+        });	    
+	    
+	    
 	    e.stopImmediatePropagation();
 	});
 	
@@ -2072,11 +2075,9 @@ function ctn() {
             error: function(xhr, textStatus, error) {
             }
         });
-        
     };
     
     
- 	
 	$c('#custanet-menu-save').click(function(e){
 		custanet_save_func(true);
 		return false;

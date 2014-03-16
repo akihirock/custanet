@@ -28,7 +28,7 @@
 </ul>
 
 <dl id="custanet-property-table" class="menuclass">
-  <dt class="custanet-item-control-header" style="text-align:center;">Property<div id="custanet-property-close">x</div></dt>
+  <dt class="custanet-item-control-header" style="text-align:center;">Property<input id="custanet-property-close" type="button" value="x"></dt>
   <dd></dd>
   <dt style="height: 42px;">Publicity</dt>
   <dd style="height: 43px;">
@@ -49,9 +49,9 @@
 </dl>
 
 <dl id="custanet-tag-table" class="menuclass">
-	<dt class="custanet-item-control-header" style="text-align:center;">Tag<div id="custanet-tag-close">x</div></dt>
+	<dt class="custanet-item-control-header" style="text-align:center;">Tag<input id="custanet-tag-close" type="button" value="x">  </dt>
 	<dd></dd>
-	<dt style="width:240px;height:auto;">
+	<dt style="width:236px;height:auto;">
 		<div id = "custanet-tag-pp-s"></div>
 	</dt>
 	<dd style="height:auto;"></dd>
@@ -60,7 +60,7 @@
 
 
 <dl id="custanet-font-table" class="menuclass">
-  <dt class="custanet-item-control-header"><input id="custanet-font-default" type="button" value="Default">&emsp;Font Control<div id="custanet-font-close">x</div></dt>
+  <dt class="custanet-item-control-header"><input id="custanet-border-default" type="button" value="Default">&emsp;Font Control<input id="custanet-font-close" type="button" value="x"></dt>
   <dd></dd>
   <dt>Size</dt>
   <dd>
@@ -268,7 +268,7 @@
 </dl>
 
 <dl id="custanet-border-table" class="menuclass">
-  <dt class="custanet-item-control-header"><input id="custanet-border-default" type="button" value="Default">&emsp;Border Control<div id="custanet-border-close">x</div></dt>
+  <dt class="custanet-item-control-header"><input id="custanet-border-default" type="button" value="Default">&emsp;Border Control<input id="custanet-border-close" type="button" value="x"></dt>
   <dd></dd>
   <dt>Style</dt>
   <dd>
@@ -359,7 +359,7 @@
 </dl>
 
 <dl id="custanet-area-table" class="menuclass">
-  <dt class="custanet-item-control-header"><input id="custanet-area-default" type="button" value="Default">&emsp;Area Control<div id="custanet-area-close">x</div></dt>
+  <dt class="custanet-item-control-header"><input id="custanet-area-default" type="button" value="Default">&emsp;Area Control<input id="custanet-area-close" type="button" value="x"></dt>
   <dd></dd>
   <dt>Top</dt>
   <dd>
@@ -544,7 +544,7 @@
 
 <div id="custanet-other-table" style="display:none;padding:5px;">
   <div id="custanet-other-name" style="margin-top:4px;font:10.5pt Verdana, Arial, Helvetica, sans-serif;float:left;"></div>
-<div id="custanet-other-close" style="float:right">x</div>&ensp;&ensp; 
+<input id="custanet-other-close" type="button" value="x" style="float:right">&ensp;&ensp; 
   <span style="float:right">&ensp;&ensp;</span>
 <input id="custanet-makefriend" type="button" value="make friend" style="float:right">&ensp;&ensp; 
   <span id="custanet-makefriend-id" style="display:none;"></span>

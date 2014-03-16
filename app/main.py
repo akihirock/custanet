@@ -66,6 +66,15 @@ JINJA_ENVIRONMENT = jinja2.Environment(
 JINJA_ENVIRONMENT.filters['timeJST'] = timeJST
 JINJA_ENVIRONMENT.filters['tag2Name'] = tag2Name
 
+
+
+def putCuser(pw,cuser):
+    mail = cuser.mal
+    memcache.add(mail,cuser)
+    memcache.add(pw,cuser) 
+    cuser.put()
+
+
 def isCuser(user):
     mail = user.user_id()
     cuser = memcache.get(mail)  # @UndefinedVariable
@@ -73,6 +82,7 @@ def isCuser(user):
         cuser = Cuser.get_by_id(user.user_id())
         memcache.add(mail,cuser)  # @UndefinedVariable
     return cuser
+
 
 def isCurl(url,title):
     curl = memcache.get(url)  # @UndefinedVariable
@@ -396,8 +406,6 @@ var deleteMe = function(){
 custanetA.addEventListener('click', deleteMe, false);
 """
             str += "custanetA.href='" + debugStr + "';custanetA.target = 'blank';custanetLoading.appendChild(custanetA);"
-            #self.response.write("alert('no user');var custanetLoading=document.getElementById('custanet-loading');custanetLoading.parentNode.removeChild(custanetLoading);var a = document.createElement('a');a.appendChild(document.createTextNode('Please login Custanet'));a.href = 'http://custanets.appspot.com/';a.target = 'blank';document.getElementById('custanet-loading').appendChild(a);")
-            #self.response.write("alert('no user');")
             self.response.write(str)
             return
         
@@ -502,85 +510,104 @@ class Set(webapp2.RequestHandler):
         if cuser == None:
             self.response.write("NoUser1")
             return
-        else:            
-            title= self.request.get('title')
-            curl = isCurl(url,title)
-            cns = self.request.get_all('cns[]')
-            
-            tag = self.request.get('tag')
-            #logging.info(tag)
-            #tag = json.loads(tag)
-            #logging.info(tag)
-            #if len(tag) == 0:
-            #    tag=[];
-            #logging.info("jooj")
-            
-            ccns_keys=[]
-            ccns = []
-            
-            for cn in cns:
-                c = json.loads(cn)
-                pubs = c["auth"]
-                usrs = []
-                usrs.append(cuser.key)
-                for p in pubs:
-                    if p != "r" and p !="u" and p !="t":
-                        fuser = Cuser.get_by_id(p)
-                        usrs.append(fuser.key)
-                        pub = "f";
-                    else: 
-                        pub = p;  
-                        
-                txt = c["txt"] 
-                txt = txt.replace('\r\n','<br>')
-                txt = txt.replace('\n','<br>')
-                txt = txt.replace('\r','<br>')                
+        else:
+            action= self.request.get('action')
+            if action=="default":
+                css = self.request.get('css')
+                css = json.loads(css)
+                defaultCss = cuser.css;
+                defaultCss.update(css)
+                cuser.css = defaultCss
                 
-                if "tag" in c:
-                    tag = c["tag"] 
-                    if len(tag) == 0:
-                        tag=[];
-                else :
-                     tag=[];
-                                    
-                logging.info("jooj")
-                logging.info(tag)
-                                                             
-                if "css" in c :
-                    css = c["css"]
-                    
-                    if (len( str(c["key"]) )==10):
-                        ccn = Ccn(url=curl.key,usr=usrs,txt=txt,css=css,pub=pub,tag=tag)
-                        ccns.append(ccn)
-                        ccns_keys.append(c["key"])      
-                    else:
-                        ccn = Ccn.get_by_id(int(c["key"])) 
-                        if ccn and ccn.usr[0] == cuser.key:
-                            logging.info( "jiijij")  
-                            ccn.usr = usrs
-                            ccn.pub = pub
-                            ccn.txt = txt
-                            ccn.css = css
-                            ccn.tag = tag       
-                            ccns.append(ccn)
-                            ccns_keys.append(c["key"])
-                            
-                else:
-                    ccn = Ccn(url=curl.key,usr=usrs,txt=txt,pub=pub,tag=tag)
-                    ccns.append(ccn)
-                    ccns_keys.append(c["key"])                           
-                      
-                            
-            ndb.put_multi(ccns)
-     
-            reCcns = []
-            for i in range(len(ccns)):
-                a = ccns[i].to_j()
-                a["wrk"] = ccns_keys[i]
-                reCcns.append(a)
+                putCuser(pw,cuser)
+                strs =  json.dumps(defaultCss);
+                self.response.write( "'" + strs + "'"  ) 
+                return 
             
-            #self.response.write( self.request.get("callback") + "(" +  json.dumps(reCcns) + ");"  )  
-            self.response.write( json.dumps(reCcns)  )  
+            
+            else:
+                title= self.request.get('title')
+                curl = isCurl(url,title)
+                cns = self.request.get_all('cns[]')
+                
+                tag = self.request.get('tag')
+                #logging.info(tag)
+                #tag = json.loads(tag)
+                #logging.info(tag)
+                #if len(tag) == 0:
+                #    tag=[];
+                #logging.info("jooj")
+                
+                ccns_keys=[]
+                ccns = []
+                
+                for cn in cns:
+                    c = json.loads(cn)
+                    pubs = c["auth"]
+                    usrs = []
+                    usrs.append(cuser.key)
+                    for p in pubs:
+                        if p != "r" and p !="u" and p !="t":
+                            fuser = Cuser.get_by_id(p)
+                            usrs.append(fuser.key)
+                            pub = "f";
+                        else: 
+                            pub = p;  
+                            
+                    txt = c["txt"] 
+                    txt = txt.replace('\r\n','<br>')
+                    txt = txt.replace('\n','<br>')
+                    txt = txt.replace('\r','<br>')                
+                    
+                    if "tag" in c:
+                        tag = c["tag"] 
+                        if len(tag) == 0:
+                            tag=[];
+                    else :
+                         tag=[];
+                                                   
+                    if "css" in c :
+                        css = c["css"]
+                        
+                        if (len( str(c["key"]) )==10):
+                            ccn = Ccn(url=curl.key,usr=usrs,txt=txt,css=css,pub=pub,tag=tag)
+                            ccns.append(ccn)
+                            ccns_keys.append(c["key"])      
+                        else:
+                            ccn = Ccn.get_by_id(int(c["key"])) 
+                            if ccn and ccn.usr[0] == cuser.key:
+                                logging.info( "jiijij")  
+                                ccn.usr = usrs
+                                ccn.pub = pub
+                                ccn.txt = txt
+                                ccn.css = css
+                                ccn.tag = tag       
+                                ccns.append(ccn)
+                                ccns_keys.append(c["key"])
+                                
+                    else:
+                        ccn = Ccn(url=curl.key,usr=usrs,txt=txt,pub=pub,tag=tag)
+                        ccns.append(ccn)
+                        ccns_keys.append(c["key"])                           
+                          
+                                
+                ndb.put_multi(ccns)
+         
+                reCcns = []
+                for i in range(len(ccns)):
+                    a = ccns[i].to_j()
+                    a["wrk"] = ccns_keys[i]
+                    reCcns.append(a)
+                
+                #self.response.write( self.request.get("callback") + "(" +  json.dumps(reCcns) + ");"  )  
+                self.response.write( json.dumps(reCcns)  )  
+            
+                
+  
+  
+  
+  
+  
   
     
 class CheckIE(webapp2.RequestHandler):
