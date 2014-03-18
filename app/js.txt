@@ -1084,8 +1084,8 @@ function ctn() {
 	        if ($c(this).hasClass('custanet-itemBox')) {
 	            var str;
 	            $c(this).resizable('enable');
-	            if ($c(this).text() == 'Write freely!!!') {
-	                $c(this).children('textarea').text('');
+	            if ($c(this).find("textarea").text() == 'Write freely!!') {
+	                $c(this).find("textarea").text("");
 	            }
 	            if (!e.metaKey) {
 	                for (var keyString in myCs) {

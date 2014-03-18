@@ -69,7 +69,7 @@ JINJA_ENVIRONMENT.filters['tag2Name'] = tag2Name
 
 
 def putCuser(pw,cuser):
-    mail = cuser.mal
+    mail = cuser.key.id()
     memcache.add(mail,cuser)
     memcache.add(pw,cuser) 
     cuser.put()
@@ -408,7 +408,7 @@ custanetA.addEventListener('click', deleteMe, false);
             str += "custanetA.href='" + debugStr + "';custanetA.target = 'blank';custanetLoading.appendChild(custanetA);"
             self.response.write(str)
             return
-        
+         
         cuser = isCuser(user)
       
         if cuser == None:
