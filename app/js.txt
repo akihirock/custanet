@@ -234,7 +234,9 @@ function cssUpdate(htmlDom, current, field) {
         if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {
             htmlDom.para.children("textarea.custanet-tbFore").css(field, $c("#custanet-color").attr("value") + xxx);
         } else {
-            value = hexUnpack($c("#custanet-color").attr("value"));
+            //value = hexUnpack($c("#custanet-color").attr("value"));
+            value = hexUnpack( current[field] );
+            
             value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['font-opacity'] / 100 + ")";
             htmlDom.para.children("textarea.custanet-tbFore").css(field, value + xxx);
         }
@@ -1455,7 +1457,7 @@ function ctn() {
 	                cssUpdate(myCs[i], myCs[i].currentcss, field);
 	            };
 	            myCs[i].para.css('border-width', '20px');
-	            myCs[i].para.css('z-index',pzindex);
+	            //myCs[i].para.css('z-index',pzindex);
 	        }
 	    };
 	    return false;
