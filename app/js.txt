@@ -221,7 +221,85 @@ if(!$c.support.checkOn && $c.support.checkClone){browser='chrome';}else if($c.su
 var fonts={'serif':{alt:'serif',url:''},'sans-serif':{alt:'sans-serif',url:''},'cursive':{alt:'cursive',url:''},'fantasy':{alt:'fantasy',url:''},'monospace':{alt:'monospace',url:''},'Verdana':{alt:'Verdana',url:''},'Arial':{alt:'Arial',url:''}};
 function update_font(family){load_css(family);}
 function load_css(family){if(!fonts[family]['loaded']){fonts[family]['loaded']=true;if(fonts[family]['url']!=""){$c("head").append('<link href="'+fonts[family]['url']+'" rel="stylesheet" type="text/css">');}}}
-function cssUpdate(htmlDom,current,field){var i,value,xxx="";if(field=='font-family'){load_css(current[field]);}var appVersion=window.navigator.appVersion.toLowerCase();htmlDom.currentcss[field]=current[field];if(field=='color'){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){htmlDom.para.children("textarea.custanet-tbFore").css(field,$c("#custanet-color").attr("value")+xxx);}else{value=hexUnpack($c("#custanet-color").attr("value") );value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['font-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css(field,value+xxx);}}else if(field=='font-size'){htmlDom.para.children("textarea.custanet-tbFore").css(field,current[field]);}else if(field=='font-opacity'){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){}else{value=hexUnpack(htmlDom.currentcss["color"]);value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['font-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css('color',value+xxx);}}else if(field=='text-shadow-positonx'||field=='text-shadow-positony'||field=='text-shadow-blur'||field=='text-shadow'){value=htmlDom.currentcss["text-shadow"];value=value+" "+current['text-shadow-positonx']+" "+current['text-shadow-positony']+" "+current['text-shadow-blur'];htmlDom.para.children("textarea.custanet-tbFore").css('text-shadow',value+xxx);}else if(field=="background-color"){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){}else{value=hexUnpack($c("#custanet-background-color").attr("value") );value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['background-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css('background-color',value+xxx);}}else if(field=="background-opacity"){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){}else{value=hexUnpack(htmlDom.currentcss["background-color"]);value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['background-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css('background-color',value+xxx);}}else if(field=="border-color"){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){}else{value=hexUnpack($c("#custanet-border-color").attr("value") );value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['border-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css('border-color',value+xxx);}}else if(field=="border-opacity"){if(appVersion.indexOf("msie 6.0")>-1||appVersion.indexOf("msie 7.0")>-1||appVersion.indexOf("msie 8.0")>-1){}else{value=hexUnpack(htmlDom.currentcss["border-color"]);value="rgba("+value[0]*255+","+value[1]*255+","+value[2]*255+","+current['border-opacity']/100+")";htmlDom.para.children("textarea.custanet-tbFore").css('border-color',value+xxx);}}else if(field=='box-shadow-positonx'||field=='box-shadow-positony'||field=='box-shadow-blur'||field=='box-shadow'){value=htmlDom.currentcss["box-shadow"];value=value+" "+current['box-shadow-positonx']+" "+current['box-shadow-positony']+" "+current['box-shadow-blur'];htmlDom.para.children("textarea.custanet-tbFore").css('-moz-box-shadow',value+xxx);htmlDom.para.children("textarea.custanet-tbFore").css('-webkit-box-shadow',value+xxx);}else if(field=='border-radius'){htmlDom.para.children("textarea.custanet-tbFore").css("-moz-border-radius",current['border-radius']+xxx);htmlDom.para.children("textarea.custanet-tbFore").css("-webkit-border-radius",current['border-radius']+xxx);}else if(field=='top'){htmlDom.para.css(field,current[field] );}else if(field=="left"){htmlDom.para.css(field,current[field] );}else if(field=="depth"){htmlDom.para.css("z-index",(Number(baseZ)+Number(current[field]))+xxx);}else{if(field=="height"||field=="width"){htmlDom.para.children("textarea.custanet-tbFore").css(field,current[field]);}else{htmlDom.para.children("textarea.custanet-tbFore").css(field,current[field]+xxx);}}};
+
+
+function cssUpdate(htmlDom, current, field) {
+    var i, value, xxx = "";
+    if (field == 'font-family') {
+        load_css(current[field]);
+    }
+    var appVersion = window.navigator.appVersion.toLowerCase();
+    htmlDom.currentcss[field] = current[field];
+    if (field == 'color') {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {
+            htmlDom.para.children("textarea.custanet-tbFore").css(field, $c("#custanet-color").attr("value") + xxx);
+        } else {
+            value = hexUnpack($c("#custanet-color").attr("value"));
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['font-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css(field, value + xxx);
+        }
+    } else if (field == 'font-size') {
+        htmlDom.para.children("textarea.custanet-tbFore").css(field, current[field]);
+    } else if (field == 'font-opacity') {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {} else {
+            value = hexUnpack(htmlDom.currentcss["color"]);
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['font-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css('color', value + xxx);
+        }
+    } else if (field == 'text-shadow-positonx' || field == 'text-shadow-positony' || field == 'text-shadow-blur' || field == 'text-shadow') {
+        value = htmlDom.currentcss["text-shadow"];
+        value = value + " " + current['text-shadow-positonx'] + " " + current['text-shadow-positony'] + " " + current['text-shadow-blur'];
+        htmlDom.para.children("textarea.custanet-tbFore").css('text-shadow', value + xxx);
+    } else if (field == "background-color") {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {} else {
+            value = hexUnpack($c("#custanet-background-color").attr("value"));
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['background-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css('background-color', value + xxx);
+        }
+    } else if (field == "background-opacity") {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {} else {
+            value = hexUnpack(htmlDom.currentcss["background-color"]);
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['background-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css('background-color', value + xxx);
+        }
+    } else if (field == "border-color") {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {} else {
+            value = hexUnpack($c("#custanet-border-color").attr("value"));
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['border-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css('border-color', value + xxx);
+        }
+    } else if (field == "border-opacity") {
+        if (appVersion.indexOf("msie 6.0") > -1 || appVersion.indexOf("msie 7.0") > -1 || appVersion.indexOf("msie 8.0") > -1) {} else {
+            value = hexUnpack(htmlDom.currentcss["border-color"]);
+            value = "rgba(" + value[0] * 255 + "," + value[1] * 255 + "," + value[2] * 255 + "," + current['border-opacity'] / 100 + ")";
+            htmlDom.para.children("textarea.custanet-tbFore").css('border-color', value + xxx);
+        }
+    } else if (field == 'box-shadow-positonx' || field == 'box-shadow-positony' || field == 'box-shadow-blur' || field == 'box-shadow') {
+        value = htmlDom.currentcss["box-shadow"];
+        value = value + " " + current['box-shadow-positonx'] + " " + current['box-shadow-positony'] + " " + current['box-shadow-blur'];
+        htmlDom.para.children("textarea.custanet-tbFore").css('-moz-box-shadow', value + xxx);
+        htmlDom.para.children("textarea.custanet-tbFore").css('-webkit-box-shadow', value + xxx);
+    } else if (field == 'border-radius') {
+        htmlDom.para.children("textarea.custanet-tbFore").css("-moz-border-radius", current['border-radius'] + xxx);
+        htmlDom.para.children("textarea.custanet-tbFore").css("-webkit-border-radius", current['border-radius'] + xxx);
+    } else if (field == 'top') {
+        htmlDom.para.css(field, current[field]);
+    } else if (field == "left") {
+        htmlDom.para.css(field, current[field]);
+    } else if (field == "depth") {
+        htmlDom.para.css("z-index", (Number(baseZ) + Number(current[field])) + xxx);
+    } else {
+        if (field == "height" || field == "width") {
+            htmlDom.para.children("textarea.custanet-tbFore").css(field, current[field]);
+        } else {
+            htmlDom.para.children("textarea.custanet-tbFore").css(field, current[field] + xxx);
+        }
+    }
+};
+
+
+
+
 function cssUpdates(current, field) {
 	for (var keyString in myCs) {
 　　		if(myCs[keyString].isselected){
@@ -1352,7 +1430,7 @@ function ctn() {
 	
 	
 	$c('#custanet-menu-copy').click(function (e) {
-	    var ptop, pleft;
+	    var ptop, pleft,pzindex;
 		for (var keyString in myCs) {
 	        if (myCs[keyString].isselected) {
 	            ptop = parseInt(myCs[keyString].para.css('top')) + 20;
@@ -1368,6 +1446,8 @@ function ctn() {
 	        	myCs[i] = new myD(i, $c(a));
 	            
 	            $c.extend(myCs[i].currentcss, myCs[i].currentcss);
+	            pzindex = myCs[keyString].para.css('z-index') + 1;
+	            myCs[i].currentcss['z-index'] = pzindex;
 	            myCs[i].currentcss['top'] = parseInt(myCs[keyString].para.css('top')) + 60;
 	            myCs[i].currentcss['left'] = parseInt(myCs[keyString].para.css('left')) + 60;
 	            myCs[i].isselected = true;
@@ -1375,6 +1455,7 @@ function ctn() {
 	                cssUpdate(myCs[i], myCs[i].currentcss, field);
 	            };
 	            myCs[i].para.css('border-width', '20px');
+	            myCs[i].para.css('z-index',pzindex);
 	        }
 	    };
 	    return false;
