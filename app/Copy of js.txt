@@ -128,7 +128,7 @@ CurlTag=new Array();
 var constFlg=false;
 var debugStr;
 debugStr='https://custanets.appspot.com';
-//debugStr='http://localhost:11080';
+debugStr='http://localhost:11080';
 
 $c('#custanet-friend-text').css('background-color',pubc);
 
@@ -815,7 +815,7 @@ function ctn() {
 	    $c('#custanet-main-pannel').height('');
 	});
 	
-	$c('#custanet-main-pannel').css({'position':'absolute','top':$c(window).scrollTop(),'display':'','z-index':Number(zPannel) + Number(baseZ) + 1000}).draggable({
+	$c('#custanet-main-pannel').css({'position':'absolute','top':$c(window).scrollTop(),'display':'','z-index':Number(zPannel) + Number(baseZ)}).draggable({
 	    cancel: '#custanet-others-msgs,#custanet-friend-text,#custanet-tag-s',
 	    stop: function () {
 	        custanetmainpannelt = $c(this).offset().top - (document.body.scrollTop || document.documentElement.scrollTop);
@@ -837,7 +837,7 @@ function ctn() {
 	
 	
 	
-	$c('#custanet-navmenu').css('z-index', Number(zList) + Number(baseZ) + 1000);
+	$c('#custanet-navmenu').css('z-index', Number(zList) + Number(baseZ));
 	$c('.menuclass,#custanet-other-table').css('z-index', Number(zTable) + Number(baseZ));
 	
 	$c('.menuclass').draggable({
@@ -1435,35 +1435,66 @@ function ctn() {
 	    var ptop, pleft,pzindex;
 		for (var keyString in myCs) {
 	        if (myCs[keyString].isselected) {
-	        
-	            ptop = parseInt(myCs[keyString].para.css('top')) + 80;
-	            pleft = parseInt(myCs[keyString].para.css('left')) + 80;
-	            pzindex = Number(myCs[keyString].para.css('z-index')) + 1;
-	          
-				var str = {};
-				$c.extend(str,myCs[keyString].currentcss);				
-			    var a = returnC( myCs[keyString].para.find("textarea").val(), str);
-			    var b = $c('<div></div>');
-			    
-			    $c(b).html(a).css({'position':'absolute','top': ptop,'left': pleft,'z-index':pzindex}).prepend("<div class='custanet-not-saved-icon'>not saved</div>");;
-			    
-			    if (str['text-shadow-flg'] == 0) {
-			         $c(a).css('text-shadow', '');
-			    }
-			    if (str['box-shadow-flg'] == 0) {
-			         $c(a).css('box-shadow', 'none').css('-moz-box-shadow', 'none').css('-webkit-box-shadow', 'none');
-			    }
-			    $c('body:first').append(b);
-
-	           	var i = randomStr();
-	        	myCs[i] = new myD(i, $c(b));
-
-	            myCs[i].currentcss['z-index'] = pzindex;
-	            myCs[i].currentcss['top'] = ptop ;
-	            myCs[i].currentcss['left'] = pleft;
-	            myCs[i].isselected = false;
+	            ptop = parseInt(myCs[keyString].para.css('top')) + 20;
+	            pleft = parseInt(myCs[keyString].para.css('left')) + 20;
+	            myCs[keyString].para.css('left', pleft).css('top', ptop).css('border-width', '0px').css('opacity', '1.00').resizable('disable');
+	            myCs[keyString].isselected = false;
+	            var a = $c("<div class='custanet-itemBox'><textarea class='custanet-tbFore'></textarea></div>");
+	            $c('body:first').append(a);
+	            var b = myCs[keyString].para.children('textarea.custanet-tbFore').text();
+	            $c(a).css('position', 'absolute').css('top', parseInt(myCs[keyString].para.css('top')) + 20).css('left', parseInt(myCs[keyString].para.css('left')) + 20).children('textarea.custanet-tbFore').text(b);
 	            
-	            $c(b).addClass('custanet-itemBox');
+	           	var i = randomStr();
+	        	myCs[i] = new myD(i, $c(a));
+	            
+	            $c.extend(myCs[i].currentcss, myCs[i].currentcss);
+	            pzindex = myCs[keyString].para.css('z-index') + 1;
+	            myCs[i].currentcss['z-index'] = pzindex;
+	            myCs[i].currentcss['top'] = parseInt(myCs[keyString].para.css('top')) + 60;
+	            myCs[i].currentcss['left'] = parseInt(myCs[keyString].para.css('left')) + 60;
+	            myCs[i].isselected = true;
+	            for (var field in myCs[i].currentcss) {
+	                cssUpdate(myCs[i], myCs[i].currentcss, field);
+	            };
+	            myCs[i].para.css('border-width', '20px');
+	            //myCs[i].para.css('z-index',pzindex);
+	           
+		  var str = {};
+		  $c.extend(str, jQuery.parseJSON(cn.css));
+	      var a = returnC((cn.txt).replace(/<br>/g,"\r\n") , str);
+	      var b = $c('<div></div>');
+	      $c(b).html(a).css('position', 'absolute').css('top', str['top']).css('left', str['left']).css('display', 'none').css('z-index', Number(str['depth']) + Number(baseZ));
+	      if (str['text-shadow-flg'] == 0) {
+	           $c(a).css('text-shadow', '');
+	      }
+	      if (str['box-shadow-flg'] == 0) {
+	           $c(a).css('box-shadow', 'none').css('-moz-box-shadow', 'none').css('-webkit-box-shadow', 'none');
+	      }
+	      $c('body:first').append(b);
+	      myCs[cn.key] = new myD(cn.key, $c(b));
+	      myCs[cn.key].auth = cn.pub;
+	      myCs[cn.key].bwidth = str["bwidth"];
+	      myCs[cn.key].bheight = str["bheight"];	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	            
+	            
+	            
+	            
+	            
+	            
+	            
 	            
 	        }
 	    };
