@@ -837,8 +837,11 @@ function ctn() {
 	
 	
 	
-	$c('#custanet-navmenu').css('z-index', Number(zList) + Number(baseZ) + 1000);
+	$c('#custanet-result,#custanet-navmenu').css('z-index', ( Number(zList) + Number(baseZ)  ));
 	$c('.menuclass,#custanet-other-table').css('z-index', Number(zTable) + Number(baseZ));
+	
+	
+	
 	
 	$c('.menuclass').draggable({
 	    handle: '.custanet-item-control-header,#custanet-property-head,#custanet-tag-head',
@@ -1229,6 +1232,12 @@ function ctn() {
 
 	        return false;
 	    }).bind('contextmenu', function (e) {
+	    
+	    
+	    	//$c('#custanet-result,#custanet-navmenu').css('z-index', ( Number(zList) + Number(baseZ)  ));
+			//$c('.menuclass,#custanet-other-table').css('z-index', Number(zTable) + Number(baseZ));
+	
+	    
 	    	cmenu(this,e,key);
 	    	return false;
 	    });
@@ -1261,10 +1270,16 @@ function ctn() {
 	        value = hexUnpack(str['background-color']);
 	        value = 'rgba(' + value[0] * 255 + ',' + value[1] * 255 + ',' + value[2] * 255 + ',' + str['background-opacity'] / 100 + ')';
 	        str['background-color'] = value;
-	        value = str['box-shadow'] + ' ' + str['box-shadow-positonx'] + ' ' + str['box-shadow-positony'] + ' ' + str['box-shadow-blur'];
-	        str['-moz-box-shadow'] = value;
-	        str['-webkit-box-shadow'] = value;
-	        str['box-shadow'] = value;
+	        
+	        if( str['box-shadow-flg']=="1" ){
+		        value = str['box-shadow'] + ' ' + str['box-shadow-positonx'] + ' ' + str['box-shadow-positony'] + ' ' + str['box-shadow-blur'];
+		        str['-moz-box-shadow'] = value;
+		        str['-webkit-box-shadow'] = value;
+		        str['box-shadow'] = value;
+	        }else{
+	        	str['box-shadow'] = "none";
+	        }
+	        
 	        value = hexUnpack(str['border-color']);
 	        value = 'rgba(' + value[0] * 255 + ',' + value[1] * 255 + ',' + value[2] * 255 + ',' + str['border-opacity'] / 100 + ')';
 	        str['border-color'] = value;
@@ -1294,9 +1309,11 @@ function ctn() {
 	        $c(ui.helper.get(0)).html(a);
 	    },
 	    stop: function (event, ui) {
+			
+			
 	        var o = $c(ui.helper.get(0)).clone();
 	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
-	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
+	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left })
 	        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
 
 	        $c('body:first').append($c(o));
@@ -1304,7 +1321,7 @@ function ctn() {
 	        myCs[i] = new myD(i, $c(o));
 	        var j = 0;
 			for( key in myCs ){ j++; } 
-	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j);
+	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j) ;
 	        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
 	        for (var keyString in myCs) {
 	            if (myCs[keyString].isselected) {
@@ -1982,10 +1999,6 @@ function ctn() {
 		        css['text-shadow-flg'] = $c("input[name='custanet-text-shadow-radio']:checked").val();
 		        break;
 		    case 'custanet-area-default':
-		    	/*
-		        css['top'] = $c("#custanet-top-spin").val();
-		        css['left'] = $c("#custanet-left-spin").val();
-		        */
 		        css['depth'] = $c("#custanet-depth-spin").val();
 		        css['height'] = $c("#custanet-height-spin").val() + "px";
 		        css['width'] = $c("#custanet-width-spin").val() + "px";
@@ -2010,6 +2023,10 @@ function ctn() {
 	    
 		custanet['css'] = JSON.stringify(css);
 	    
+	    
+	    var obj = $(this);
+	    obj.css("visibility","hidden");
+	    
         $c.ajax({
             url: debugStr + '/set',
             type: "POST",
@@ -2017,9 +2034,14 @@ function ctn() {
             success: function(result, textStatus, xhr) {
             	result = result.replace(/'/g,"")
             	defaultCss = jQuery.parseJSON(result);
+            	setTimeout( function() {
+            		 obj.css("visibility","visible");
+				}, 3000);
             },
             error: function(xhr, textStatus, error) {
-            	
+            	setTimeout( function() {
+            		 obj.css("visibility","visible");
+				}, 3000);            	
             }
         });	    
 	    

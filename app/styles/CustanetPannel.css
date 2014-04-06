@@ -486,6 +486,8 @@ width:80px;
    width:90px;
    font: 10.5px Verdana, Arial, Helvetica, sans-serif;
    color:#222;
+   border:none;
+   background-color:#fff;
 }
 
 #custanet-color,
@@ -600,6 +602,9 @@ color: #222;
 box-sizing: content-box;
 margin: 0;
 padding: 2px 4px;
+background-color:#fff;
+border:none;
+border-radius: 2px;
 }
 
 #custanet-font-close,
@@ -895,6 +900,9 @@ input.custanet-color-spin{
 width: 80px;
 font: 10.5px Verdana, Arial, Helvetica, sans-serif;
 color: #222;
+background-color:#fff;
+border:none;
+
 }
 
 #custanet-color, 
