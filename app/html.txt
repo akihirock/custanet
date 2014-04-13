@@ -576,7 +576,7 @@
     <div id="custanet-write-msg-c">
       <div id="custanet-msg-s-c">
         <div class ="custanet-defaultItemBox">
-            <textarea id="custanet-friend-text" rows="4" ></textarea>
+            <textarea id="custanet-friend-text"></textarea>
         </div>
       </div>
     </div>

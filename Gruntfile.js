@@ -37,10 +37,6 @@ module.exports = function (grunt) {
           files: ['<%= yeoman.app %>/js.txt','<%= yeoman.app %>/js/custanetcenter.js'],
           tasks: ['uglify']   	  
       },
-      coffee: {
-        files: ['<%= yeoman.app %>/js/{,*/}*.coffee'],
-        tasks: ['coffee']
-      },
       less: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
         tasks: ['less']
@@ -162,17 +158,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    coffee: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/js',
-          src: '{,*/}*.coffee',
-          dest: '<%= yeoman.app %>/js',
-          ext: '.js'
-        }]
-      }
-    },
     less: {
       dist: {
         files: {
@@ -278,7 +263,6 @@ module.exports = function (grunt) {
     },
     concurrent: {
       dist: [
-        'coffee',
         'less',
         'imagemin',
         'svgmin',
@@ -295,7 +279,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'coffee',
       'less',
       'concat',
       'cssmin',
@@ -312,7 +295,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'coffee',
     'less',
     'copy:server',
     'connect:test',

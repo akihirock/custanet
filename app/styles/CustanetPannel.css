@@ -475,6 +475,7 @@ margin-left:2px;
 font: 11.5px Verdana, Arial, Helvetica, sans-serif;
 color:#222;
 width:80px;
+
 }
 
 
@@ -488,6 +489,12 @@ width:80px;
    color:#222;
    border:none;
    background-color:#fff;
+	border: 0;
+	padding: 1px 6px;
+	text-indent: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;   
 }
 
 #custanet-color,
@@ -500,6 +507,7 @@ width:80px;
     color:#222;
 	width:70px;
 	margin-left:4px;
+	border:none;
 }
 
 
@@ -634,10 +642,6 @@ border-radius: 2px;
 
 
 
-
-
-
-
 dl.menuclass{
 	display:none;
 }
@@ -688,12 +692,14 @@ dl {
 	text-align: left;
 	width: 240px;
 }
+
+
+
+
+
 dl dt{
 	width: 6em;
 	float: left;
-	/*
-	border-top: 1px solid #AAA;
-	*/
 	clear: both;
 	padding-top:4px;
 	padding-left:4px;
@@ -701,15 +707,12 @@ dl dt{
 	height: 22px;
 	color:#666;
 	font: bold 10.5px Verdana, Arial, Helvetica, sans-serif;
+	margin:0;
 }
 
 dl dd{
 	margin-left: 6em;
 	_height: 1%; /* WinIEÇ≈ì™ÇÃï∂éöÇ™âEÇ…î˜ñ≠Ç…Ç∏ÇÍÇÈÇÃÇï‚ê≥ */
-	/*
-	border-top: 1px solid #AAA;
-	border-left: 1px solid #AAA;
-	*/
 	padding-left: 10px;
 	height: 22px;
 	padding-top: 2px;
@@ -718,6 +721,7 @@ dl dd{
 	color:#666;
 	font: bold 10.5px Verdana, Arial, Helvetica, sans-serif;
 	line-height: 1;
+	margin:0;
 }
 
 dl dt.custanet-item-control-header{
@@ -874,6 +878,9 @@ padding:8px 4px;
 margin: 0;
 margin-bottom: 6px;
 border: 1px solid #cccccc;
+box-shadow: none;
+-moz-box-shadow: none;
+-webkit-box-shadow: none;
 }
 
 input.custanet-color-spin{
@@ -1139,6 +1146,7 @@ input[name="custanet-list-cnt"]{
 	color:#000;
 	width: 100%;
 	box-sizing: border-box;
+	height:100px;
 }
 
 #custanet-friend-text:focus {
