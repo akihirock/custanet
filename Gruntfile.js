@@ -1,12 +1,6 @@
 // Generated on 2013-12-21 using generator-bootstrap-less 3.2.0
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to match all subfolders:
-// 'test/spec/**/*.js'
-
 module.exports = function (grunt) {
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
@@ -22,6 +16,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
 	pkg: grunt.file.readJSON('package.json'),  
     yeoman: yeomanConfig,
+    compass: {
+        dist: {
+            options: {
+                config: 'config.rb'
+            }
+        }
+    },
     watch: {
       concat: {
     	  files: ['<%= yeoman.app %>/styles/CustanetPannel.css',
@@ -29,9 +30,19 @@ module.exports = function (grunt) {
                   '<%= yeoman.app %>/styles/jquery-ui-1.8.10.custom.css',
                   '<%= yeoman.app %>/styles/main.css',
                   '<%= yeoman.app %>/styles/style.css',
-                  '<%= yeoman.app %>/html.txt'
+                  '<%= yeoman.app %>/html.txt',
+                  '<%= yeoman.app %>/sass/cats.scss'
                   ],
-    	  tasks: ['concat','cssmin']
+    	  tasks: ['concat','cssmin','compass']
+      },
+      sass: {
+          files: ['sass/cats.scss'],
+          tasks: ['compass', 'cmq', 'csscomb'],
+          options: {
+              //変更されたらブラウザを更新
+              livereload: true,
+              nospawn: true
+          }
       },
       uglify:{
           files: ['<%= yeoman.app %>/js.txt','<%= yeoman.app %>/js/custanetcenter.js'],
@@ -170,6 +181,26 @@ module.exports = function (grunt) {
           sourceMapRootpath: '/'
         }
       }
+    },
+    // バラバラに記述されたメディアクエリをまとめることができます。
+    cmq:{
+        options: {
+            log: false
+        },
+        dev: {
+            files: {
+                'css/': ['css/cats.css']
+            }
+        }
+    },
+    // csscombでCSSプロパティを揃えます。
+    csscomb:{
+        dev:{
+            expand: true,
+            cwd: 'css/',
+            src: ['cats.css'],
+            dest: 'css/'
+        }
     },
     rev: {
       dist: {
