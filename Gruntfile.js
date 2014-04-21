@@ -31,12 +31,12 @@ module.exports = function (grunt) {
                   '<%= yeoman.app %>/styles/main.css',
                   '<%= yeoman.app %>/styles/style.css',
                   '<%= yeoman.app %>/html.txt',
-                  '<%= yeoman.app %>/sass/cats.scss'
+                  '<%= yeoman.app %>/sass/CustanetPannel.scss'
                   ],
     	  tasks: ['concat','cssmin','compass']
       },
       sass: {
-          files: ['sass/cats.scss'],
+          files: ['sass/CustanetPannel.scss'],
           tasks: ['compass', 'cmq', 'csscomb'],
           options: {
               //変更されたらブラウザを更新
