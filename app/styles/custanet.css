@@ -24,6 +24,7 @@
   width: 220px;
   padding: 0px;
   padding-bottom: 15px;
+  border: 4px solid #fff;
   -moz-box-sizing: content-box;
   /* Firefox */
   -webkit-box-sizing: content-box;
