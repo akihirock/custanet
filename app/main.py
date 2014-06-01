@@ -18,7 +18,7 @@ from ccn import *
 import datetime
 from jinja2 import Environment, FileSystemLoader
 debugStr = "http://localhost:11080"
-#debugStr = "https://custanets.appspot.com"
+debugStr = "https://custanets.appspot.com"
 
 
 
@@ -347,9 +347,32 @@ class Login(webapp2.RequestHandler):
 
         chars = string.ascii_letters + string.digits + '_'
         pw = "".join([ random.choice(chars) for i in range(16) ])
-                  
+  
+  
+        user = users.get_current_user()
+        if user is None:
+            str = """
+var custanetLoading = document.getElementById('custanet-loading');
+custanetLoading.innerHTML="";
+var custanetA = document.createElement('a');
+custanetA.appendChild(document.createTextNode('Please login Custanet.'));
+custanetA.style.color="blue";
+custanetA.style.textDecoration="none";
+var deleteMe = function(){
+    document.body.removeChild(custanetLoading); 
+}
+custanetA.addEventListener('click', deleteMe, false);
+"""
+            str += "custanetA.href='" + debugStr + "';custanetA.target = 'blank';custanetLoading.appendChild(custanetA);"
+            self.response.write(str)
+            return 
+        
+        cuser = isCuser(user)          
+        if cuser == None:
+            self.response.write("alert('no cuser');")
+            return
+                          
         ua = self.request.environ["HTTP_USER_AGENT"]
-            
         if('MSIE' in ua):
         #if(True):
                 str = "if(typeof CUSTANETed =='undefined'){\r\n"
@@ -388,34 +411,9 @@ class Login(webapp2.RequestHandler):
                 str += "\r\n};\r\n"
                 self.response.write(str)            
                 return
-      
             
-        user = users.get_current_user()
-        
-        if user is None:
-            str = """
-var custanetLoading = document.getElementById('custanet-loading');
-custanetLoading.innerHTML="";
-var custanetA = document.createElement('a');
-custanetA.appendChild(document.createTextNode('Please login Custanet.'));
-custanetA.style.color="blue";
-custanetA.style.textDecoration="none";
-var deleteMe = function(){
-    document.body.removeChild(custanetLoading); 
-}
-custanetA.addEventListener('click', deleteMe, false);
-"""
-            str += "custanetA.href='" + debugStr + "';custanetA.target = 'blank';custanetLoading.appendChild(custanetA);"
-            self.response.write(str)
-            return
-         
-        cuser = isCuser(user)
-      
-        if cuser == None:
-            self.response.write("alert('no cuser');")
         else:
             memcache.add(pw,cuser)  # @UndefinedVariable
-            
             curl = memcache.get(url)  # @UndefinedVariable
             
             if curl is None:
@@ -464,7 +462,6 @@ custanetA.addEventListener('click', deleteMe, false);
                 allline += line.rstrip()
             str+=allline
 
-            
             f = open('html.min.txt')
             lines2 = f.readlines()
             f.close()
@@ -478,14 +475,19 @@ custanetA.addEventListener('click', deleteMe, false);
             f = open('js.txt')
             lines2 = f.readlines()
             f.close()           
-            
             allline = ""
-            
             for line in lines2:
                 allline += line
             str +=  allline
 
+
+
+
+
             str += "\r\n};\r\n"
+            
+            
+            
             self.response.write(str)
 
         

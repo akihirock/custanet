@@ -13,6 +13,8 @@
 #custanet-result .menuclass *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
   box-sizing: border-box;
 }
 
@@ -56,6 +58,29 @@
   margin-top: 2px;
   font: 10.5pt Verdana, Arial, Helvetica, sans-serif;
   padding: 0px;
+}
+
+#custanet-write {
+  padding: 10px 8px;
+  background-color: #FA8891;
+  margin: 10px 4px;
+  text-align: center;
+  font-size: 16pt;
+}
+
+#custanet-write-save,
+#custanet-write-close {
+  display: none;
+  width: 50px;
+  background-color: #FA8891;
+  text-align: center;
+  padding-top: 40px;
+  height: 100px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #custanet-command {
@@ -200,6 +225,7 @@ div.custanet-tag-active {
 .custanet-defaultItemBox {
   padding: 0px;
   color: #222;
+  width: 100%;
 }
 
 div.custanet-defaultTb {
@@ -333,6 +359,7 @@ div.custanet-our-msg-pg {
 
 #custanet-msg-s-c {
   text-align: left;
+  display: flex;
 }
 
 /* Root = Vertical, Secondary = Vertical */
@@ -694,11 +721,6 @@ dl.menuclass dt.custanet-item-control-header {
   font-size: 14px;
   height: 24px;
   cursor: move;
-  border-radius: 8px 8px 0 0;
-  -moz-border-radius: 8px 8px 0 0;
-  -webkit-border-radius: 8px 8px 0 0;
-  -o-border-radius: 8px 8px 0 0;
-  -ms-border-radius: 8px 8px 0 0;
 }
 dl.menuclass dt.custanet-item-control-header-end {
   background-color: #999;
@@ -707,11 +729,6 @@ dl.menuclass dt.custanet-item-control-header-end {
   font-size: 14px;
   height: 12px;
   cursor: move;
-  border-radius: 0 0 8px 8px;
-  -moz-border-radius: 0 0 8px 8px;
-  -webkit-border-radius: 0 0 8px 8px;
-  -o-border-radius: 0 0 8px 8px;
-  -ms-border-radius: 0 0 8px 8px;
 }
 
 #custanet-border-opacity-slider,

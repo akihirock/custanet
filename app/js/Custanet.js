@@ -2,11 +2,9 @@
 	
 	var z = document.getElementById("custanet-loading");
 	if (z==null){
-	
 		var debugStr;
 		debugStr = 'https://custanets.appspot.com/';
-		debugStr = 'http://localhost:11080/';
-	
+		//debugStr = 'http://localhost:11080/';
 		var g=window.document,
 			a=g.createElement('script'),
 			b=g.createElement('script'),

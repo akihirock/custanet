@@ -573,11 +573,16 @@
     </div>
     -->
 
+	<div id="custanet-write" style="display:none;">write</div>
+
+
     <div id="custanet-write-msg-c">
       <div id="custanet-msg-s-c">
+        <div id="custanet-write-save">save</div>
         <div class ="custanet-defaultItemBox">
             <textarea id="custanet-friend-text"></textarea>
         </div>
+        <div id="custanet-write-close">close</div>
       </div>
     </div>
     

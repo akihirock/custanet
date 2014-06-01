@@ -124,13 +124,24 @@ var zPannel=10000,zList=20000,zTable=30000,zDrag=40000,pubc='#87cefa',pric='#f99
 items=new Array(),
 oitems=new Array(),
 myCs = {},
-CurlTag=new Array();
+CurlTag=new Array(),
+ctype=0;
+
+if ( $c(window).width() <= 640 ){
+	ctype=1;
+}
+
+
+
+
 var constFlg=false;
 var debugStr;
 debugStr='https://custanets.appspot.com';
-debugStr='http://localhost:11080';
+//debugStr='http://localhost:11080';
 
 $c('#custanet-friend-text').css('background-color',pubc);
+$c("body").css("position","initial");
+
 
 var getLargestZIndex=function(){var largestZIndex=0;var defaultView=document.defaultView;var func=function(tagname){var elems=document.getElementsByTagName(tagname),len=elems.length;for(var i=0;i<len;i++){var elem=elems[i];var zIndex=elem.style.zIndex;if(!zIndex){var css=elem.currentStyle||defaultView.getComputedStyle(elem,null);zIndex=css?css.zIndex:0;}zIndex -=0;if(largestZIndex<zIndex) largestZIndex=zIndex;}};if(arguments.length==0) func('*');else for(var i=0;i<arguments.length;i++) func(arguments[i]);return largestZIndex;};
 var baseZ = getLargestZIndex();
@@ -864,17 +875,24 @@ function ctn() {
 	    }
 	}).click(function (e) {
 	    e.stopImmediatePropagation();
-	});	$c('#custanet-other-table').resizable({alsoResize:'#custanet-other-text'});
+	});	
+	
+	$c('#custanet-other-table').resizable({alsoResize:'#custanet-other-text'});
+	
 	window.onscroll = function () {
-	    document.getElementById('custanet-main-pannel').style.top = custanetmainpannelt + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-navmenu').style.top = custanetmenu + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-font-table').style.top = custanetfonttbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-area-table').style.top = custanetareatbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-border-table').style.top = custanetbordertbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-property-table').style.top = custanetprptbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-tag-table').style.top = custanettagtbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	    document.getElementById('custanet-other-table').style.top = custanetothertbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
-	};	$c('#custanet-font-close,#custanet-area-close,#custanet-border-close,#custanet-property-close,#custanet-tag-close').click(function(e){var ob=$c(this).attr('id');ob=ob.replace('close','table');$c('#'+ob).css('display','none');$c.data($c('#'+ob).get(0),'dragFlg',false);e.stopImmediatePropagation();});
+		if( ctype!=1 ){
+		    document.getElementById('custanet-main-pannel').style.top = custanetmainpannelt + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-navmenu').style.top = custanetmenu + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-font-table').style.top = custanetfonttbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-area-table').style.top = custanetareatbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-border-table').style.top = custanetbordertbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-property-table').style.top = custanetprptbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-tag-table').style.top = custanettagtbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';
+		    document.getElementById('custanet-other-table').style.top = custanetothertbl + (document.body.scrollTop || document.documentElement.scrollTop) + 'px';	
+		}
+	};	
+	
+	$c('#custanet-font-close,#custanet-area-close,#custanet-border-close,#custanet-property-close,#custanet-tag-close').click(function(e){var ob=$c(this).attr('id');ob=ob.replace('close','table');$c('#'+ob).css('display','none');$c.data($c('#'+ob).get(0),'dragFlg',false);e.stopImmediatePropagation();});
 	$c('#custanet-other-close').click(function(e){$c("#custanet-other-table").css('display','none');e.stopImmediatePropagation();});
 	
 	$c('#custanet-command-yours').click(function () {
@@ -1291,161 +1309,55 @@ function ctn() {
 	};
 	
 	
+	if( ctype != 1 ){	
 	
+		$c('div.custanet-defaultItemBox').draggable({
+		    opacity: 0.5,
+		    helper: 'clone',
+	        cancel: "none",
+		    start: function (event, ui) {
+		        var a = $c("#custanet-friend-text").val();
+		        
+		        if(a==""){
+		        	a = returnC( "Write freely!!", defaultCss);
+		        }else{
+		        	a = returnC( a , defaultCss);
+		        }
+		        
+		        $c(ui.helper.get(0)).html(a);
+		    },
+		    stop: function (event, ui) {
+		        var o = $c(ui.helper.get(0)).clone();
+		        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
+		        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left })
+		        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
 	
-	$c('div.custanet-defaultItemBox').draggable({
-	    opacity: 0.5,
-	    helper: 'clone',
-        cancel: "none",
-	    start: function (event, ui) {
-	        var a = $c("#custanet-friend-text").val();
-	        
-	        if(a==""){
-	        	a = returnC( "Write freely!!", defaultCss);
-	        }else{
-	        	a = returnC( a , defaultCss);
-	        }
-	        
-	        $c(ui.helper.get(0)).html(a);
-	    },
-	    stop: function (event, ui) {
-			
-			
-	        var o = $c(ui.helper.get(0)).clone();
-	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
-	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left })
-	        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
-
-	        $c('body:first').append($c(o));
-	        var i = randomStr();
-	        myCs[i] = new myD(i, $c(o));
-	        var j = 0;
-			for( key in myCs ){ j++; } 
-	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j) ;
-	        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
-	        for (var keyString in myCs) {
-	            if (myCs[keyString].isselected) {
-	                unSelect(myCs[keyString]);
-	            }
-	        }
-	        
-	        if (('createTouch' in document) || ('ontouchstarT' in document)) {
-			    cmenu( $c(o) ,event, i);
-			}
-	        
-	        $c('#custanet-main-pannel').height('');
-	    }
-	}).click(function (e) {
-		$c(this).find("textarea").focus();
-	});
-
-	/*
-	 $c('*').droppable({
-	 	greedy : true,
-        accept: '.ui-draggable',
-        drop: function(event, ui) {
-            console.log( $c(this).get(0)  );
-            //console.log(  $c( $c(this).get(0) ).get(0)  );
-	        
-	        var o = $c(ui.helper.get(0)).clone();
-	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
-	        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left})
-	        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
-
-	        $c('body:first').append($c(o));
-	        var i = randomStr();
-	        myCs[i] = new myD(i, $c(o));
-	        var j = 0;
-			for( key in myCs ){ j++; } 
-	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j);
-	        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
-	        for (var keyString in myCs) {
-	            if (myCs[keyString].isselected) {
-	                unSelect(myCs[keyString]);
-	            }
-	        }
-	        
-	        if (('createTouch' in document) || ('ontouchstarT' in document)) {
-			    cmenu( $c(o) ,event, i);
-			}
-	        
-	        $c('#custanet-main-pannel').height('');
-	        
-        }
-    });
-	*/
-	
-	/*
-	$c('div.custanet-defaultItemBox').draggable({
-	    opacity: 0.5,
-	    helper: 'clone',
-	    start: function (event, ui) {
-	        var a = returnC('Write freely!!!', defaultCss);
-	        $c(ui.helper.get(0)).children('div.custanet-defaultTb').replaceWith(a);
-	    },
-	    stop: function (event, ui) {
-	        var o = $c(ui.helper.get(0)).clone();
-	        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox').css('position', 'absolute').css('opacity', '1.0').css('top', $c(ui.helper.get(0)).offset().top).css('left', $c(ui.helper.get(0)).offset().left);
-	        $c('body:first').append($c(o));
-	        var i = randomStr();
-	        myCs[i] = new myD(i, $c(o));
-	        var j = 0;
-			for( key in myCs ){ j++; } 
-	        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j);
-	        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
-	        for (var keyString in myCs) {
-	            if (myCs[keyString].isselected) {
-	                unSelect(myCs[keyString]);
-	            }
-	        }
-	        var l = $c('#custanet-your-list');
-	        var y = l.append("<tr class='custanet-list-cnt'><td style='padding:0px;text-align:center;'><input type='checkbox' name='custanet-list-cnt' value='" + i + "'></td><td colspan='2' style='word-break:break-all;'><div class='custanet-list-div' style='white-space:nowrap;overflow:hidden;'>Write freely!!!</div></td></tr>").find("input:checkbox[value=" + i + "]").parents('tr');
-            var u = $c(y).find('div.custanet-list-div');
-            
-            $c(y).find("input").bind("click", function(e){
-		        m = myCs[$c(this).val()];
-		        n = m.para;
-		        if (m.isselected == true) {
-		            $c(this).prop('checked', false).parents('tr').find('td').css('background-color', 'white');
-		            unSelect(m);
-		        } else {
-		            n.css('border-width', '20px');
-		            n.width(myCs[i].para.children('textarea').outerWidth() + 0).height(n.children('textarea').outerHeight() + 0);
-		            if (m.isselected == false) {
-		                var pcolor;
-		                if (m.auth == 'r') {
-		                    pcolor = pric;
-		                } else if (m.auth == 'u') {
-		                    pcolor = pubc;
-		                } else {
-		                    pcolor = fric;
-		                }
-		                $c(n).css('top', parseInt(n.css('top')) - 20 + 'px').css('left', parseInt(n.css('left')) - 20 + 'px').css('border-color', pcolor);
-		                m.isselected = true;
-		                $c(e.target).prop('checked', true).parents('tr').find('td').css('background-color', pcolor);
+		        $c('body:first').append($c(o));
+		        var i = randomStr();
+		        myCs[i] = new myD(i, $c(o));
+		        var j = 0;
+				for( key in myCs ){ j++; } 
+		        myCs[i].currentcss['depth'] = Number(myCs[i].currentcss['depth']) + Number(j) ;
+		        myCs[i].para.css('z-index', Number(myCs[i].currentcss['depth']) + Number(baseZ));
+		        for (var keyString in myCs) {
+		            if (myCs[keyString].isselected) {
+		                unSelect(myCs[keyString]);
 		            }
 		        }
-		    });
-	        
-	        if (l.find('tr').size() <= 2) {
-	            l.before("<div id='custanet-not-saved' style='text-align:left;'>custanet not to be saved</div>");
-	        }
-	        var htmlSanitize = function (r) {
-	            r = r.replace(/</g, "&lt;");
-	            r = r.replace(/>/g, "&gt;");
-	            return r;
-	        };
-	        $c(o).change(function () {
-	            var r = $c(myCs[i].para).children('textarea').val();
-	            $c(u).html(htmlSanitize(r));
-	        });
-	        $c('#custanet-main-pannel').height('');
-	
-	    }
-	});
-	*/
-	
+		        
+		        if (('createTouch' in document) || ('ontouchstarT' in document)) {
+				    cmenu( $c(o) ,event, i);
+				}
+		        
+		        $c('#custanet-main-pannel').height('');
+		    }
+		}).click(function (e) {
+			$c(this).find("textarea").focus();
+		});
 
+	}
+	
+	
 	
 	
 	$c('#custanet-menu-copy').click(function (e) {
@@ -2102,6 +2014,7 @@ function ctn() {
 	 	
 	 cflg = !constFlg; 	
 	 	
+	 /*	
      if(cflg){	 	
 	 	var f=false;
 		for (var keyString in myCs) {
@@ -2112,6 +2025,7 @@ function ctn() {
 		}
 		if(!f){return;}
 	  }
+	  */
 	  
         var str = "",valstr= '',wrk;
 
@@ -2187,6 +2101,9 @@ function ctn() {
             error: function(xhr, textStatus, error) {
             }
         });
+        
+        $("#custanet-navmenu").hide();
+        
     };
     
     
@@ -2225,134 +2142,123 @@ $c('#custanet-others-msgs').delegate('.custanet-cnt-pri,.custanet-cnt-pub,.custa
 });
 
 
-
 var custanet_show_func = function (resp, ba) {
-	
-	var msgs = $c('#custanet-others-msgs');
-	var c="",d="";
-	var pc,tw,cntxt,wrk;
 
-	for (var cn in resp) {
-	  if(resp[cn].key != undefined){
-        pc="";
-        tw="";	
-        cntxt="";
-		cn = resp[cn];
-	    
-		if((cn.usr[0].id==cuser.key) && (cn.pub == 'r') ){
-		 	pc = pric;
-		 	wrk="custanet-cnt-pri";
-		}else if(cn.pub == 'u' ) {
-		    pc = pubc;
-		    wrk="custanet-cnt-pub";
-		} else {
-			pc = fric;
-			wrk="custanet-cnt-fri";
-			var ary = new Array();
-			for (cu in cn.usr){
-				if(cn.usr[cu].id != undefined){
-					ary.push( cn.usr[cu].id);
-				}
-			} 
-			cn.pub = ary.join(" ")
-		}
-		
-		if(cn.tw == 'true'){ tw = "<img style='padding:2px;' height='14px' src='http://twitter-badges.s3.amazonaws.com/t_mini-a.png'>";}
-		
-		if(cn.css!="" && cn.css != undefined){
-			cntxt="ui-icon ui-icon-radio-on";
-		}else{
-			wrk="";
-		}
-		
-	  	$c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pri").remove();
-	  	$c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-fri").remove();
-	    $c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pub").remove();
-	  
-	  
-	  
-	    var tag="";
-	    for (t in cn.tag){
-	    	if( custanet_genre[cn.tag[t]] != undefined){
-	    		tag += custanet_genre[cn.tag[t]] + " ";
-	    	}
-	    }
-	    
-	    
-	  	c += "<div class='" + wrk + "'>" + 
-	  		 "<div style='background-color:" + pc + "'>" + 
-	  		 "<span class='" + cntxt + "' style='float:left;height:15px;width:16px;'></span>" + tw + 
-	  		 "<span class='custanet-key' value='" + cn.key + "'></span>" + 
-	  		 "<span class='custanet-user-key' value='" + cn.usr[0].id + "'></span>" + 
-	  		 "<span class='custanet-user-name' style='float:left;'>" + cn.usr[0].nam + "</span><br>" + 
-	  		 "<span class='custanet-time'>" + cn.dat + "</span><br>" + 
-	  		 "<span class='custanet-tag'>" + tag +  "</span>" + 
-	  		 "</div>" + 
-	  		 "<div style='word-break: break-all;margin-bottom:20px;'>" + cn.txt + "<br></div></div>";		  	
-	  	
-		
-	   $c("input[name='custanet-list-cnt'][value='" + cn.wrk + "']").parents("tr").remove();
-	
-	   if($c(".custanet-list-div").size()==0){
-	       $c("#custanet-not-saved").remove();
-	   }		 
-	  		 
-	  		 
-	
-	   if(cn.css!="" && cn.css != undefined){
-		  
-		  for (var keyString in myCs) {
-       		if (myCs[cn.key]!=null) {
-       			$c(myCs[cn.key].para).remove();
-       		}
-       		if (myCs[cn.wrk]!=null) {
-       			$c(myCs[cn.wrk].para).remove();
-       		}
-       	  }
-       	  
-		  //存在しない
-		  var str = {};
-		  $c.extend(str, jQuery.parseJSON(cn.css));
-	      var a = returnC((cn.txt).replace(/<br>/g,"\r\n") , str);
-	      var b = $c('<div></div>');
-	      $c(b).html(a).css('position', 'absolute').css('top', str['top']).css('left', str['left']).css('display', 'none').css('z-index', Number(str['depth']) + Number(baseZ));
-	      if (str['text-shadow-flg'] == 0) {
-	           $c(a).css('text-shadow', '');
-	      }
-	      if (str['box-shadow-flg'] == 0) {
-	           $c(a).css('box-shadow', 'none').css('-moz-box-shadow', 'none').css('-webkit-box-shadow', 'none');
-	      }
-	      $c('body:first').append(b);
-	      myCs[cn.key] = new myD(cn.key, $c(b));
-	      myCs[cn.key].auth = cn.pub;
-	      myCs[cn.key].bwidth = str["bwidth"];
-	      myCs[cn.key].bheight = str["bheight"];
-	      
-	      
-	      
-		  $c(b).addClass('custanet-itemBox');
-		  
-	   }
-	   
-      }
-	}
+    var msgs = $c('#custanet-others-msgs');
+    var c = "",
+        d = "";
+    var pc, tw, cntxt, wrk;
 
-	    if (ba) {
-	        $c(msgs).append(c);
-	    } else {
-	        $c(msgs).prepend(c);
-	    }
-	
-	    if( $c("#custanet-others-msgs div").size()==0){
-	    	$c("#custanet-others-msgs").html("<div id='custanet-nopost'>no post</div>")
-	    }else{
-	    	$c("#custanet-nopost").remove();
-	    }  
+    for (var cn in resp) {
+        if (resp[cn].key != undefined) {
+            pc = "";
+            tw = "";
+            cntxt = "";
+            cn = resp[cn];
 
-        
-        $c('#custanet-main-pannel').css('display', 'block');
-       
-    };
+            if ((cn.usr[0].id == cuser.key) && (cn.pub == 'r')) {
+                pc = pric;
+                wrk = "custanet-cnt-pri";
+            } else if (cn.pub == 'u') {
+                pc = pubc;
+                wrk = "custanet-cnt-pub";
+            } else {
+                pc = fric;
+                wrk = "custanet-cnt-fri";
+                var ary = new Array();
+                for (cu in cn.usr) {
+                    if (cn.usr[cu].id != undefined) {
+                        ary.push(cn.usr[cu].id);
+                    }
+                }
+                cn.pub = ary.join(" ")
+            }
+
+            if (cn.tw == 'true') {
+                tw = "<img style='padding:2px;' height='14px' src='http://twitter-badges.s3.amazonaws.com/t_mini-a.png'>";
+            }
+
+            if (cn.css != "" && cn.css != undefined) {
+                cntxt = "ui-icon ui-icon-radio-on";
+            } else {
+                wrk = "";
+            }
+
+            $c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pri").remove();
+            $c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-fri").remove();
+            $c("span.custanet-key[value='" + cn.wrk + "']").parents("div.custanet-cnt-pub").remove();
+
+            var tag = "";
+            for (t in cn.tag) {
+                if (custanet_genre[cn.tag[t]] != undefined) {
+                    tag += custanet_genre[cn.tag[t]] + " ";
+                }
+            }
+            c += "<div class='" + wrk + "'>" +
+                "<div style='background-color:" + pc + "'>" +
+                "<span class='" + cntxt + "' style='float:left;height:15px;width:16px;'></span>" + tw +
+                "<span class='custanet-key' value='" + cn.key + "'></span>" +
+                "<span class='custanet-user-key' value='" + cn.usr[0].id + "'></span>" +
+                "<span class='custanet-user-name' style='float:left;'>" + cn.usr[0].nam + "</span><br>" +
+                "<span class='custanet-time'>" + cn.dat + "</span><br>" +
+                "<span class='custanet-tag'>" + tag + "</span>" +
+                "</div>" +
+                "<div style='word-break: break-all;margin-bottom:20px;'>" + cn.txt + "<br></div></div>";
+
+            $c("input[name='custanet-list-cnt'][value='" + cn.wrk + "']").parents("tr").remove();
+
+            if ($c(".custanet-list-div").size() == 0) {
+                $c("#custanet-not-saved").remove();
+            }
+            if (cn.css != "" && cn.css != undefined) {
+
+                for (var keyString in myCs) {
+                    if (myCs[cn.key] != null) {
+                        $c(myCs[cn.key].para).remove();
+                    }
+                    if (myCs[cn.wrk] != null) {
+                        $c(myCs[cn.wrk].para).remove();
+                    }
+                }
+
+                //存在しない
+                var str = {};
+                $c.extend(str, jQuery.parseJSON(cn.css));
+                var a = returnC((cn.txt).replace(/<br>/g, "\r\n"), str);
+                var b = $c('<div></div>');
+                $c(b).html(a).css('position', 'absolute').css('top', str['top']).css('left', str['left']).css('display', 'none').css('z-index', Number(str['depth']) + Number(baseZ));
+                if (str['text-shadow-flg'] == 0) {
+                    $c(a).css('text-shadow', '');
+                }
+                if (str['box-shadow-flg'] == 0) {
+                    $c(a).css('box-shadow', 'none').css('-moz-box-shadow', 'none').css('-webkit-box-shadow', 'none');
+                }
+                $c('body:first').append(b);
+                myCs[cn.key] = new myD(cn.key, $c(b));
+                myCs[cn.key].auth = cn.pub;
+                myCs[cn.key].bwidth = str["bwidth"];
+                myCs[cn.key].bheight = str["bheight"];
+                myCs[cn.key].currentcss = str;
+                $c(b).addClass('custanet-itemBox');
+            }
+        }
+    }
+
+    if (ba) {
+        $c(msgs).append(c);
+    } else {
+        $c(msgs).prepend(c);
+    }
+
+    if ($c("#custanet-others-msgs div").size() == 0) {
+        $c("#custanet-others-msgs").html("<div id='custanet-nopost'>no post</div>")
+    } else {
+        $c("#custanet-nopost").remove();
+    }
+
+    $c('#custanet-main-pannel').css('display', 'block');
+
+};
 
 
     $c("#custanet-makefriend").click(function () {
@@ -2430,7 +2336,48 @@ var custanet_show_func = function (resp, ba) {
     
     custanet_show_func(ccns, true);
     
-    
+	if( ctype==1 ){
+		$c('#custanet-main-pannel').draggable( 'option', 'cancel', '#custanet-main-pannel' ).css({
+			"width":"100%",
+			"position":"fixed",
+			"border":"none",
+			"top": "initial",
+			"bottom":"0"
+		});
+		$c("#custanet-write-msg-c,#custanet-write-save,#custanet-write-close").hide();
+		$c("#custanet-main-pannel-m").height(30).width(30).css("padding-top","5px");
+
+		$c("#custanet-write").bind('touchstart', function() {
+		//$c("#custanet-write").click(function(){
+			$c("#custanet-write-msg-c,#custanet-write-save,#custanet-write-close").show();
+			$("#custanet-friend-text").focus() 
+			$c(this).hide();
+		}).show();
+		
+		$c("#custanet-write-save").bind('touchstart', function() {
+			constFlg = true;
+			custanet_save_func(true);
+			return false;
+		});
+		
+		$c("#custanet-write-close").bind('touchstart', function() {
+		//$c("#custanet-write-close").click(function(){
+			$c("#custanet-write-msg-c,this,#custanet-write-save").hide();
+			$c("#custanet-write").show();
+		});
+		
+		$c('#custanet-main-pannel-m').bind('touchstart', function() {
+		    if ($c(this).text() == '-') {
+		        $c('#custanet-command').css('display', 'none');
+		        $c(this).text('+');
+		    } else {
+		        $c('#custanet-command').css('display', 'block');
+		        $c(this).text('-');
+		    }
+		});		
+		
+		
+	}    
     
 }	
 
@@ -2636,6 +2583,8 @@ ctnC();
 }
 */
 ctnC();
+
+
 
 
 });
