@@ -2345,7 +2345,8 @@ var custanet_show_func = function (resp, ba) {
 			"bottom":"0"
 		});
 		$c("#custanet-write-msg-c,#custanet-write-save,#custanet-write-close").hide();
-		$c("#custanet-main-pannel-m").height(30).width(30).css("padding-top","5px");
+		$c("#custanet-main-pannel-m").height(30).width(30).css({"padding-top":"5px","position":"absolute","right":"0"});
+		$c("custanet-main-pannel").css({"padding":"4px 0 0 0","border":"border-top: 10px solid #000"});
 
 		$c("#custanet-write").bind('touchstart', function() {
 		//$c("#custanet-write").click(function(){

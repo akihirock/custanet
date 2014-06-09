@@ -93,10 +93,10 @@
   <input type="text" id="custanet-color" name="color" value="">
   <input id="custanet-color-button" type="button" value="ShowPicker">
   </dd>
-  <dt class="custanet-color-picker">
+  <dt class="custanet-color-picker" style="width:100px;height:103px;padding:0;">
     <div id="custanet-color-picker"></div>
   </dt>
-  <dd class="custanet-color-picker">
+  <dd class="custanet-color-picker"  style="margin-left: 100px; height: 100px; padding-left: 0px;">
     <table id="custanet-color-table" class="custanet-color-tables" border=0 cellspacing="0" cellpadding="0">
       <tr>
         <td colspan="3" style="text-align:center;">
