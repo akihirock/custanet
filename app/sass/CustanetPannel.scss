@@ -944,55 +944,69 @@ border-radius: 4px;
 	margin-top:-2px;
 }
 
-dt.custanet-color-picker,
-dt.custanet-text-shadow-picker,
-dt.custanet-background-color-picker,
-dt.custanet-border-color-picker,
-dt.custanet-box-shadow-picker{
-	border-color: #DDD;
-	border-left-width: 2px;
-	border-style: solid;
-	border-right-width: 0;
-	border-top-width: 0;
-	border-bottom-width: 0;	
-width: 100px;
-height: 100px;
-padding: 0;
-margin: 0;
-}
-
-dd.custanet-color-picker,
-dd.custanet-text-shadow-picker,
-dd.custanet-background-color-picker,
-dd.custanet-border-color-picker,
-dd.custanet-box-shadow-picker{
-	border-color: #DDD;
-	border-right-width: 0;
-	border-style: solid;
-	border-left-width: 0;
-	border-top-width: 0;
-	border-bottom-width: 0;
+dl.menuclass{
+	dt.custanet-color-picker,
+	dt.custanet-text-shadow-picker,
+	dt.custanet-background-color-picker,
+	dt.custanet-border-color-picker,
+	dt.custanet-box-shadow-picker{
+		border-color: #DDD;
+		border-left-width: 2px;
+		border-style: solid;
+		border-right-width: 0;
+		border-top-width: 0;
+		border-bottom-width: 0;	
+	width: 100px;
+	height: 100px;
 	padding: 0;
-	margin-left:100px;
-	height:100px;
-	padding-left:0;
-	background-color: #EEE
-}
+	margin: 0;
+	
+	width: 100px;
+	height: 103px; 
+	padding: 0px; 
+	
+	
+	}
+	
+	dd.custanet-color-picker,
+	dd.custanet-text-shadow-picker,
+	dd.custanet-background-color-picker,
+	dd.custanet-border-color-picker,
+	dd.custanet-box-shadow-picker{
+		border-color: #DDD;
+		border-right-width: 0;
+		border-style: solid;
+		border-left-width: 0;
+		border-top-width: 0;
+		border-bottom-width: 0;
+		padding: 0;
+		margin-left:100px;
+		height:100px;
+		padding-left:0;
+		background-color: #EEE;
+	margin-left: 100px; 
+	height:103px; 
+	padding-left: 0px	
+		
+	}
+	
+	
+	#custanet-color-picker,
+	#custanet-text-shadow-picker,
+	#custanet-background-color-picker,
+	#custanet-border-color-picker,
+	#custanet-box-shadow-picker{
+		background-color: #FFF;
+		margin-top:-2px;
+	}
 
-
-#custanet-color-picker,
-#custanet-text-shadow-picker,
-#custanet-background-color-picker,
-#custanet-border-color-picker,
-#custanet-box-shadow-picker{
-	background-color: #FFF;
-	margin-top:-2px;
 }
 
 input[type="radio"][name="custanet-text-shadow-radio"],
 input[type="radio"][name="custanet-box-shadow-radio"]{
 	margin:0;
 }
+
 
 
 

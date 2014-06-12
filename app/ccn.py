@@ -51,6 +51,7 @@ class CcnUtils(object):
             cusers.append(cuserObj)
         result['usr'] = cusers
         result['key'] = self.key.id()
+        
         return result 
      
 
@@ -143,6 +144,11 @@ class Ccn(CcnUtils,ndb.Model):
     wrk = ndb.StringProperty()
     
     
-    
+class Cca(CcnUtils,ndb.Model):
+    url = ndb.KeyProperty(Curl,indexed=True)
+    usr = ndb.KeyProperty(Cuser,indexed=True)
+    dat = ndb.DateTimeProperty(indexed=True,auto_now_add=True)
+
+       
     
     

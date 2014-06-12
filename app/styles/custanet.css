@@ -916,11 +916,11 @@ input.custanet-color-spin {
   margin-top: -2px;
 }
 
-dt.custanet-color-picker,
-dt.custanet-text-shadow-picker,
-dt.custanet-background-color-picker,
-dt.custanet-border-color-picker,
-dt.custanet-box-shadow-picker {
+dl.menuclass dt.custanet-color-picker,
+dl.menuclass dt.custanet-text-shadow-picker,
+dl.menuclass dt.custanet-background-color-picker,
+dl.menuclass dt.custanet-border-color-picker,
+dl.menuclass dt.custanet-box-shadow-picker {
   border-color: #DDD;
   border-left-width: 2px;
   border-style: solid;
@@ -931,13 +931,15 @@ dt.custanet-box-shadow-picker {
   height: 100px;
   padding: 0;
   margin: 0;
+  width: 100px;
+  height: 103px;
+  padding: 0px;
 }
-
-dd.custanet-color-picker,
-dd.custanet-text-shadow-picker,
-dd.custanet-background-color-picker,
-dd.custanet-border-color-picker,
-dd.custanet-box-shadow-picker {
+dl.menuclass dd.custanet-color-picker,
+dl.menuclass dd.custanet-text-shadow-picker,
+dl.menuclass dd.custanet-background-color-picker,
+dl.menuclass dd.custanet-border-color-picker,
+dl.menuclass dd.custanet-box-shadow-picker {
   border-color: #DDD;
   border-right-width: 0;
   border-style: solid;
@@ -948,14 +950,16 @@ dd.custanet-box-shadow-picker {
   margin-left: 100px;
   height: 100px;
   padding-left: 0;
-  background-color: #eeeeee;
+  background-color: #EEE;
+  margin-left: 100px;
+  height: 103px;
+  padding-left: 0px;
 }
-
-#custanet-color-picker,
-#custanet-text-shadow-picker,
-#custanet-background-color-picker,
-#custanet-border-color-picker,
-#custanet-box-shadow-picker {
+dl.menuclass #custanet-color-picker,
+dl.menuclass #custanet-text-shadow-picker,
+dl.menuclass #custanet-background-color-picker,
+dl.menuclass #custanet-border-color-picker,
+dl.menuclass #custanet-box-shadow-picker {
   background-color: #FFF;
   margin-top: -2px;
 }

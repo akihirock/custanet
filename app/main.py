@@ -480,11 +480,11 @@ custanetA.addEventListener('click', deleteMe, false);
                 allline += line
             str +=  allline
 
-
-
-
-
             str += "\r\n};\r\n"
+            
+
+            cca = Cca(url=curl.key,usr=cuser.key)
+            cca.put()    
             
             
             
@@ -578,7 +578,7 @@ class Set(webapp2.RequestHandler):
                         else:
                             ccn = Ccn.get_by_id(int(c["key"])) 
                             if ccn and ccn.usr[0] == cuser.key:
-                                logging.info( "jiijij")  
+
                                 ccn.usr = usrs
                                 ccn.pub = pub
                                 ccn.txt = txt

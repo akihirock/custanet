@@ -93,10 +93,10 @@
   <input type="text" id="custanet-color" name="color" value="">
   <input id="custanet-color-button" type="button" value="ShowPicker">
   </dd>
-  <dt class="custanet-color-picker" style="width:100px;height:103px;padding:0;">
+  <dt class="custanet-color-picker">
     <div id="custanet-color-picker"></div>
   </dt>
-  <dd class="custanet-color-picker"  style="margin-left: 100px; height: 100px; padding-left: 0px;">
+  <dd class="custanet-color-picker">
     <table id="custanet-color-table" class="custanet-color-tables" border=0 cellspacing="0" cellpadding="0">
       <tr>
         <td colspan="3" style="text-align:center;">
@@ -207,7 +207,7 @@
   <input type="text" id="custanet-text-shadow" name="color" value="">
   <input id="custanet-text-shadow-button" type="button" value="ShowPicker">
   </dd>
-  <dt class="custanet-text-shadow-picker" style="width:100px;height:103px;padding:0;">
+  <dt class="custanet-text-shadow-picker" >
     <div id="custanet-text-shadow-picker"></div>
   </dt>
   <dd class="custanet-text-shadow-picker">
@@ -396,10 +396,10 @@
   <input type="text" id="custanet-background-color" name="color" value="">
   <input id="custanet-background-color-button" type="button" value="ShowPicker">
   </dd>
-  <dt class="custanet-background-color-picker" style="width:100px;height:103px;padding:0;">
+  <dt class="custanet-background-color-picker">
     <div id="custanet-background-color-picker"></div>
   </dt>
-  <dd class="custanet-background-color-picker" style="margin-left: 100px; height: 100px; padding-left: 0px;">
+  <dd class="custanet-background-color-picker">
     <table id="custanet-background-color-table" class="custanet-color-tables" border=0 cellspacing="0" cellpadding="0">
       <tr>
         <td colspan="3" style="text-align:center;">
@@ -482,10 +482,10 @@
   <input type="text" id="custanet-box-shadow" name="color" value="">
   <input id="custanet-box-shadow-button" type="button" value="ShowPicker">
   </dd>
-  <dt class="custanet-box-shadow-picker" style="width:100px;height: 100px;padding:0;">
+  <dt class="custanet-box-shadow-picker">
     <div id="custanet-box-shadow-picker"></div>
   </dt>
-  <dd class="custanet-box-shadow-picker" style="margin-left: 100px; height:103px; padding-left: 0px;">
+  <dd class="custanet-box-shadow-picker">
     <table id="custanet-box-shadow-table" class="custanet-color-tables" border=0 cellspacing="0" cellpadding="0">
       <tr>
         <td colspan="3" style="text-align:center;">

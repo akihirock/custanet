@@ -18,8 +18,9 @@
   <!-- endbuild -->
   <script>
   	var ccnsLen =  {{ccns|length }};
-  	var ccns =[{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}",
-  	"usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}","txt":"{{ccn.txt}}","dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}];		
+  	var ccns =[
+  	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}","txt":"{{ccn.txt}}","dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
+  	];		
   </script>
  
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
