@@ -339,7 +339,8 @@ class Login(webapp2.RequestHandler):
                 "CP=CAO PSA OUR"
             )
         
-        url = self.request.get('url')
+        url = self.request.get('u')
+        title = self.request.get('t')
         
         if url == "":
             self.response.write("alert('no url');")
@@ -372,6 +373,7 @@ custanetA.addEventListener('click', deleteMe, false);
             self.response.write("alert('no cuser');")
             return
                           
+        cns = [];                  
         ua = self.request.environ["HTTP_USER_AGENT"]
         if('MSIE' in ua):
         #if(True):
@@ -414,7 +416,9 @@ custanetA.addEventListener('click', deleteMe, false);
             
         else:
             memcache.add(pw,cuser)  # @UndefinedVariable
-            curl = memcache.get(url)  # @UndefinedVariable
+            
+            curl = isCurl(url,title)
+            #curl = memcache.get(url)  # @UndefinedVariable
             
             if curl is None:
                 curl = Curl.get_by_id(url)
@@ -423,6 +427,7 @@ custanetA.addEventListener('click', deleteMe, false);
 
             if curl is None:
                 ccns=[]
+                cns.append(curl)
             else:
                 ccns = Ccn.query(Ccn.url == curl.key , Ccn.usr.IN([cuser.key]) ).order(-Ccn.dat).fetch()
               
@@ -483,10 +488,14 @@ custanetA.addEventListener('click', deleteMe, false);
             str += "\r\n};\r\n"
             
 
-            cca = Cca(url=curl.key,usr=cuser.key)
-            cca.put()    
-            
-            
+            #cca = Cca(url=curl.key,usr=cuser.key)
+            #cca.put()    
+
+            usrs = []
+            usrs.append(cuser.key)            
+            ccn = Ccn(url=curl.key,usr=usrs,pub="a")
+            #cns.append(cns)
+            ccn.put()    
             
             self.response.write(str)
 

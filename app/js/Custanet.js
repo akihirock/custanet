@@ -9,6 +9,7 @@
 			a=g.createElement('script'),
 			b=g.createElement('script'),
 			d=encodeURI(location.href),
+			t=encodeURI(document.title),
 			e=g.createElement('div'),
 			f=g.createTextNode('Custanet\nloading...'),
 			h=e.style,
@@ -25,7 +26,7 @@
 			h.width='100%';
 			document.body.appendChild(e);
 			var c=g.createElement('script');
-			c.src=debugStr + 'login?url='+d.replace("#","'''");
+			c.src=debugStr + 'login?u='+d.replace("#","'''")+'&t='+t.replace("#","'''") 
 			j.item(0).appendChild(c);	
 	}		
 })();
