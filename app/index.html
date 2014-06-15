@@ -19,7 +19,7 @@
   <script>
   	var ccnsLen =  {{ccns|length }};
   	var ccns =[
-  	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}","txt":"{{ccn.txt}}","dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
+  	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}",  {% if ccn.pub != "a" %}  "txt":"{{ccn.txt}}" {% else %} "txt":"" {% endif %},"dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
   	];		
   </script>
  
@@ -237,7 +237,7 @@
               <td colspan="2">
                 <a href="/[ccn.url]/" target="_blank">
                   <div>
-                    <span>/[ccn.ttl]/</span>-
+                    <span>/[ccn.ttl]/</span> 
                     <span class="txt">/[br(ccn.txt)]/</span>
                     <span ng-repeat="ct in say(ccn.tag)" class="tag label label-success">/[ct]/</span>
                     <span style="float:right">[/[ccn.usr]/]  /[ccn.dat]/</span>

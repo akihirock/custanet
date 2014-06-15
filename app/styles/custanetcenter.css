@@ -6067,7 +6067,6 @@ color: #fff;
 #custanetTable tr td:first-child{
 	width:30px;
 	text-align:center;
-	padding-right: 1px;
 }
 
 #custanetTable tr.r td:first-child{
