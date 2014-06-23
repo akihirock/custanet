@@ -16,12 +16,7 @@
     
   
   <!-- endbuild -->
-  <script>
-  	var ccnsLen =  {{ccns|length }};
-  	var ccns =[
-  	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}",  {% if ccn.pub != "a" %}  "txt":"{{ccn.txt}}" {% else %} "txt":"" {% endif %},"dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
-  	];		
-  </script>
+  
  
   <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
   <script>
@@ -274,6 +269,25 @@
   <script src="js/jquery.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
   <script>
+  
+    var ccnsLen =  {{ccns|length }};
+  	var ccns =[
+  	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}",  {% if ccn.pub != "a" %}  "txt":"{{ccn.txt}}" {% else %} "txt":"" {% endif %},"dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
+  	];	
+  	var ccas =[
+  	{% for cca in ccas %}{"url":"{{cca.url.id}}","ttl":"{{cca.url.ttl}}","usr":"{{cca.usr}}","dat":"{{ cca.dat |timeJST }}","key":"{{cca.key}}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
+  	];  
+ 
+    $.each(ccas, function(i, value) {
+    	if ( value.pub == undefined ){
+    		value.txt = "";
+    		value.pub = "a";
+    		value.tag = "";
+    	}
+        ccns.push(value);
+    });
+  
+  
        var customInterpolationApp = angular.module('customInterpolationApp', []).factory('myService', function () {
 	        return {
 	            say: function (tags) {

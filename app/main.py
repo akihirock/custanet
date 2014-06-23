@@ -157,14 +157,21 @@ class MainHandler(BaseHandler):
                 template_values['fris'] = fris
                 
                 ccns = Ccn.query(Ccn.usr.IN([cuser.key])).order(-Ccn.dat).fetch()
-                
                 ccn_dics = []
-            
                 for ccn in ccns:
                     ccn_dic = ccn.to_json()
                     ccn_dics.append(ccn_dic)
-                    
                 template_values['ccns'] = ccn_dics
+                
+                ccas = Cca.query(Ccn.usr == cuser.key).order(-Cca.dat).fetch()
+                cca_dics = []
+                for cca in ccas:
+                    cca_dic = cca.to_json()
+                    cca_dics.append(cca_dic)
+                template_values['ccas'] = cca_dics
+                
+                
+                
                 template_values['cuserKey'] = cuser.key.id()
                 
 
@@ -491,12 +498,9 @@ custanetA.addEventListener('click', deleteMe, false);
             #cca = Cca(url=curl.key,usr=cuser.key)
             #cca.put()    
 
-            usrs = []
-            usrs.append(cuser.key)            
-            ccn = Ccn(url=curl.key,usr=usrs,pub="a")
-            #cns.append(cns)
-            ccn.put()    
-            
+      
+            cca = Cca(url=curl.key,usr=cuser.key)
+            cca.put()    
             self.response.write(str)
 
         

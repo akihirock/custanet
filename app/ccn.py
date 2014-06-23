@@ -21,7 +21,6 @@ class CcnUtils(object):
             cusers.append(cuserObj)
         result['usr'] = cusers
         """
-        
         for c in result["usr"]:
             cuser = c.get()
             cusers.append(cuser.nam)
@@ -53,6 +52,25 @@ class CcnUtils(object):
         result['key'] = self.key.id()
         
         return result 
+ 
+ 
+ 
+class CcaUtils(object):
+    
+    def to_json(self):
+        result = super(CcaUtils,self).to_dict()
+        result['key'] = self.key.id()
+        curl = result["url"].get()
+        curlObj = {'id':result["url"].id(),"ttl":curl.ttl}
+        result['url'] = curlObj
+        
+        cuser = result["usr"].get()
+        result['usr'] = cuser.nam      
+        
+        return result
+ 
+    
+ 
      
 
 class CuserUtils(object):
@@ -75,7 +93,6 @@ class CuserUtils(object):
             cuserObj = { "id":c.id(),"nam":cuser.nam}
             cusers.append(cuserObj)
         result["fri"] = cusers         
-        
         
         return result 
     
@@ -144,7 +161,7 @@ class Ccn(CcnUtils,ndb.Model):
     wrk = ndb.StringProperty()
     
     
-class Cca(CcnUtils,ndb.Model):
+class Cca(CcaUtils,ndb.Model):
     url = ndb.KeyProperty(Curl,indexed=True)
     usr = ndb.KeyProperty(Cuser,indexed=True)
     dat = ndb.DateTimeProperty(indexed=True,auto_now_add=True)

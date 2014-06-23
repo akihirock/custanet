@@ -137,6 +137,18 @@ color: #fff;
 	color:#777;
 }
 
+
+input[name=custanet-list] {
+  margin-left: 0;
+}
+
+
+
+
+
+
+
+
 #invitebtnmsg{
 	display:none;
 }

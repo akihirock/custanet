@@ -2150,7 +2150,7 @@ var custanet_show_func = function (resp, ba) {
     var pc, tw, cntxt, wrk;
 
     for (var cn in resp) {
-        if (resp[cn].key != undefined && resp[cn].pub != 'a') {
+        if (resp[cn].key != undefined ) {
             pc = "";
             tw = "";
             cntxt = "";
