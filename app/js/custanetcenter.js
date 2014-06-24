@@ -324,6 +324,44 @@
 		
 		
 		
+	  	$("#comment-cn-btn,#access-cn-btn").click(function(){
+	  		
+	  		if( $(this).hasClass("btn-info")  ){
+	  			$(this).removeClass("btn-info");
+	  		}else{
+	  			$(this).addClass("btn-info");
+	  		}
+	  		
+	  		var ccs = [];
+	  		
+	  		if( $("#comment-cn-btn").hasClass("btn-info") ){
+	  		  $.extend(true, ccs, ccns);
+	  		}
+	  		
+	  		if( $("#access-cn-btn").hasClass("btn-info") ){
+		  	    $.each(ccas, function(i, value) {
+		  	    	if ( value.pub == undefined ){
+		  	    		value.txt = "";
+		  	    		value.pub = "a";
+		  	    		value.tag = "";
+		  	    	}
+		  	        ccs.push(value);
+		  	    });
+		  	}	  		 
+        	var scope = angular.element( $("#main-pannel") ).scope();
+        	scope.ccns = ccs;
+        	scope.$apply();
+
+        	
+        	
+        	
+		});			
+		
+		
+		
+		
+		
+		
 		
 		
 		

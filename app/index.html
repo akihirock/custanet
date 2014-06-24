@@ -211,6 +211,16 @@
 			      <button id="delete-cn-btn" type="submit" class="btn btn-default btn-sm" disabled="disabled">Delete</button>
 			    </div>
       			{% endif %} 
+      			
+      			<div style="float:left;padding: 4px;">
+			      <button id="comment-cn-btn" type="submit" class="btn btn-default btn-sm btn-info">comment</button>
+			    </div>
+			    
+      			<div style="float:left;padding: 4px;">
+			      <button id="access-cn-btn" type="submit" class="btn btn-default btn-sm">access</button>
+			    </div>			    
+			    
+			    
             </td>
             <td>
               <select class="form-control" id="displayCount">
@@ -278,14 +288,12 @@
   	{% for cca in ccas %}{"url":"{{cca.url.id}}","ttl":"{{cca.url.ttl}}","usr":"{{cca.usr}}","dat":"{{ cca.dat |timeJST }}","key":"{{cca.key}}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
   	];  
  
-    $.each(ccas, function(i, value) {
-    	if ( value.pub == undefined ){
-    		value.txt = "";
-    		value.pub = "a";
-    		value.tag = "";
-    	}
-        ccns.push(value);
-    });
+ 
+ 	var ccs=[];
+    $.extend(true, ccs, ccns);
+ 
+
+ 
   
   
        var customInterpolationApp = angular.module('customInterpolationApp', []).factory('myService', function () {
@@ -309,7 +317,7 @@
 	});
 	  
 	var mainCtrl = function($scope, myService) {
-	    $scope.ccns = ccns;
+	    $scope.ccns = ccs;
 	    $scope.say = myService.say;
 	    $scope.br = myService.br;
 	}
