@@ -235,7 +235,7 @@
           </thead>
         {% endif%} 
           <tbody>
-            <tr ng-repeat="ccn in ccns" class="/[ccn.pub]/" data-link="/[ccn.url]/">
+            <tr ng-repeat="ccn in ccns | orderBy:predicate:reverse" class="/[ccn.pub]/" data-link="/[ccn.url]/">
               <td>
                 <input type="checkbox" name="custanet-list" value="/[ccn.key]/">
               </td>
@@ -318,6 +318,7 @@
 	  
 	var mainCtrl = function($scope, myService) {
 	    $scope.ccns = ccs;
+	    $scope.predicate = '-dat';
 	    $scope.say = myService.say;
 	    $scope.br = myService.br;
 	}

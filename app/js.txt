@@ -137,7 +137,7 @@ if ( $c(window).width() <= 640 ){
 var constFlg=false;
 var debugStr;
 debugStr='https://custanets.appspot.com';
-//debugStr='http://localhost:11080';
+debugStr='http://localhost:11080';
 
 $c('#custanet-friend-text').css('background-color',pubc);
 $c("body").css("position","initial");
