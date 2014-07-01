@@ -18,7 +18,7 @@ from ccn import *
 import datetime
 from jinja2 import Environment, FileSystemLoader
 debugStr = "http://localhost:11080"
-#debugStr = "https://custanets.appspot.com"
+debugStr = "https://custanets.appspot.com"
 
 
 
