@@ -1328,16 +1328,23 @@ function ctn() {
 		    },
 		    stop: function (event, ui) {
 		    
+		    
 		    	var x= event.clientX,y=event.clientY;
 		    	
-		    	var xx = $("#custanet-main-pannel").offset().left ,yy=$("#custanet-main-pannel").offset().top
+		    	var xx = $c("#custanet-main-pannel").offset().left;
+		    	var yy= $c("#custanet-main-pannel").offset().top;
 		    	
-		    	if( (x > xx) && ( x < (xx+$("#custanet-main-pannel").width()) ) &&  (y > yy) && ( y < (yy+$("#custanet-main-pannel").height()) )    ){
+
+		    	if( (x > xx) && ( x < (xx+$c("#custanet-main-pannel").width()) ) &&  (y > yy) && ( y < (yy+$c("#custanet-main-pannel").height()) )    ){
 		    	}else{
+		    	
+		    	
 			        var o = $c(ui.helper.get(0)).clone();
 			        $c(o).removeClass('custanet-defaultItemBox').addClass('custanet-itemBox')
 			        .css( {'position':'absolute','opacity':'1.0','top':$c(ui.helper.get(0)).offset().top,'left':$c(ui.helper.get(0)).offset().left })
 			        .prepend("<div class='custanet-not-saved-icon'>not saved</div>");
+		
+		
 		
 			        $c('body:first').append($c(o));
 			        var i = randomStr();

@@ -5972,7 +5972,7 @@ td.visible-print {
 
 #left-pannel-request,
 #left-pannel-pub{
-	/*display:none;*/
+	display:none;
 }
 
 .centered{
