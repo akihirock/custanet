@@ -85,11 +85,16 @@ def isCuser(user):
 
 
 def isCurl(url,title):
+    logging.info("aaaa000")
     curl = memcache.get(url)  # @UndefinedVariable
     if curl is None:
-        curl = Curl.get_by_id(url)
-        if curl is None:
-            curl = Curl(id = url,ttl = title)
+        logging.info("bbb1111")
+        curl = Curl.query(Curl.url == url ).fetch() #Curl.get_by_id(url)
+        
+        if len(curl) == 0:
+            
+            logging.info("ccc2222")
+            curl = Curl(url = url,ttl = title)
             curl.put()
         memcache.add(url,curl)  # @UndefinedVariable
     return curl
@@ -382,126 +387,84 @@ custanetA.addEventListener('click', deleteMe, false);
                           
         cns = [];                  
         ua = self.request.environ["HTTP_USER_AGENT"]
-        if('MSIE' in ua):
-        #if(True):
-                str = "if(typeof CUSTANETed =='undefined'){\r\n"
-                str += 'var cuser=' + json.dumps(cuser.to_j()) + ';\r\n'
-                str += "var l2 = document.createElement('link');\r\n"
-                str += "l2.setAttribute('rel', 'stylesheet');l2.setAttribute('type', 'text/css');\r\n"
-                str += "l2.setAttribute('href', '" + debugStr +  "/styles/custanet.min.css');\r\n"
-                str += "document.getElementsByTagName('head')[0].appendChild(l2);\r\n"
-                str += "var element = document.createElement('div');\r\n"
-                str += "element.id = 'custanet-result';\r\n"
-                str += "var objBody = document.getElementsByTagName('body').item(0);\r\n"
-                str += "objBody.appendChild(element);\r\n"
-                str += "var pw='" + pw + "';\r\n"
-                str += "var view = document.getElementById('custanet-result');\r\n"
-                
-                f = open('html.min.txt')
-                lines2 = f.readlines()
-                f.close()
-                
-                allline = ""
-                for line in lines2:
-                    allline += line.rstrip()
-                str += "var CUSTANETed=1;view.innerHTML ='" + allline + "';\r\n"
-                str += 'var ccns="";\r\n'
-                str += "$('#custanet_welcome_iframe').attr('src','" + debugStr + "/loginIE.html');\r\n"
-                f = open('js.min.txt')
-                lines2 = f.readlines()
-                f.close()           
-                
-                allline = ""
-                
-                for line in lines2:
-                    allline += line
-                str +=  allline
-    
-                str += "\r\n};\r\n"
-                self.response.write(str)            
-                return
-            
+        
+        memcache.add(pw,cuser)  # @UndefinedVariable
+        
+        curl = isCurl(url,title)
+        #curl = memcache.get(url)  # @UndefinedVariable
+        
+        #logging.info("ddd" + curl.url) 
+
+        if curl is None:
+            logging.info("111111111") 
+            ccns=[]
+            #ccns.append(curl)
         else:
-            memcache.add(pw,cuser)  # @UndefinedVariable
-            
-            curl = isCurl(url,title)
-            #curl = memcache.get(url)  # @UndefinedVariable
-            
-            if curl is None:
-                curl = Curl.get_by_id(url)
-                if curl is not None:
-                    memcache.add(url,curl)  # @UndefinedVariable
+            logging.info("2") 
+            ccns = Ccn.query(Ccn.url == curl.key , Ccn.usr.IN([cuser.key]) ).order(-Ccn.dat).fetch()
+          
+          
+        ccn_dics = []        
+        for ccn in ccns:
+            logging.info("nnn1:::"+ccn.txt)  
+            ccn_dic = ccn.to_j()
+            ccn_dics.append(ccn_dic)
+        
+        
+        
+        #str = "(function(){\r\n"
+        str = "if(typeof CUSTANETed =='undefined'){\r\n"
+        str += 'var cuser=' + json.dumps(cuser.to_j()) + ';\r\n'
+        str += "var l2 = document.createElement('link');\r\n"
+        str += "l2.setAttribute('rel', 'stylesheet');l2.setAttribute('type', 'text/css');\r\n"
+        str += "l2.setAttribute('href', '" + debugStr +  "/styles/custanet.min.css');\r\n"
+        str += "document.getElementsByTagName('head')[0].appendChild(l2);\r\n"
+        str += "var element = document.createElement('div');\r\n"
+        str += "element.id = 'custanet-result';\r\n"
+        str += "var objBody = document.getElementsByTagName('body').item(0);\r\n"
+        str += "objBody.appendChild(element);\r\n"
+        str += "var pw='" + pw + "';\r\n"
+        str += "var view = document.getElementById('custanet-result');\r\n"
+        
+        f = open('jquery.js')
+        lines2 = f.readlines()
+        f.close()   
+        allline = ""
+        for line in lines2:
+            allline += line.rstrip()
+        str+=allline
+        
+        f = open('jqueryui.js')
+        lines2 = f.readlines()
+        f.close()
+        allline = ""
+        for line in lines2:
+            allline += line.rstrip()
+        str+=allline
 
-            if curl is None:
-                ccns=[]
-                cns.append(curl)
-            else:
-                ccns = Ccn.query(Ccn.url == curl.key , Ccn.usr.IN([cuser.key]) ).order(-Ccn.dat).fetch()
-              
-            ccn_dics = []        
-            for ccn in ccns:
-                ccn_dic = ccn.to_j()
-                ccn_dics.append(ccn_dic)
-            
-            
-            #str = "(function(){\r\n"
-            str = "if(typeof CUSTANETed =='undefined'){\r\n"
-            str += 'var cuser=' + json.dumps(cuser.to_j()) + ';\r\n'
-            str += "var l2 = document.createElement('link');\r\n"
-            str += "l2.setAttribute('rel', 'stylesheet');l2.setAttribute('type', 'text/css');\r\n"
-            str += "l2.setAttribute('href', '" + debugStr +  "/styles/custanet.min.css');\r\n"
-            str += "document.getElementsByTagName('head')[0].appendChild(l2);\r\n"
-            str += "var element = document.createElement('div');\r\n"
-            str += "element.id = 'custanet-result';\r\n"
-            str += "var objBody = document.getElementsByTagName('body').item(0);\r\n"
-            str += "objBody.appendChild(element);\r\n"
-            str += "var pw='" + pw + "';\r\n"
-            str += "var view = document.getElementById('custanet-result');\r\n"
-            
-            f = open('jquery.js')
-            lines2 = f.readlines()
-            f.close()   
-            allline = ""
-            for line in lines2:
-                allline += line.rstrip()
-            str+=allline
-            
-            f = open('jqueryui.js')
-            lines2 = f.readlines()
-            f.close()
-            allline = ""
-            for line in lines2:
-                allline += line.rstrip()
-            str+=allline
+        f = open('html.min.txt')
+        lines2 = f.readlines()
+        f.close()
+        
+        allline = ""
+        for line in lines2:
+            allline += line.rstrip()
+        str += "var CUSTANETed=1;view.innerHTML ='" + allline + "';\r\n"
+        str += 'var ccns=' + json.dumps([p.to_j() for p in ccns ] ) + ';\r\n'
+        
+        f = open('js.txt')
+        lines2 = f.readlines()
+        f.close()           
+        allline = ""
+        for line in lines2:
+            allline += line
+        str +=  allline
 
-            f = open('html.min.txt')
-            lines2 = f.readlines()
-            f.close()
-            
-            allline = ""
-            for line in lines2:
-                allline += line.rstrip()
-            str += "var CUSTANETed=1;view.innerHTML ='" + allline + "';\r\n"
-            str += 'var ccns=' + json.dumps([p.to_j() for p in ccns ] ) + ';\r\n'
-            
-            f = open('js.txt')
-            lines2 = f.readlines()
-            f.close()           
-            allline = ""
-            for line in lines2:
-                allline += line
-            str +=  allline
-
-            str += "\r\n};\r\n"
-            
-
-            #cca = Cca(url=curl.key,usr=cuser.key)
-            #cca.put()    
-
-      
-            cca = Cca(url=curl.key,usr=cuser.key)
-            cca.put()    
-            self.response.write(str)
+        str += "\r\n};\r\n"
+        
+        cca = Cca(url=curl.key,usr=cuser.key)
+        cca.put()    
+        self.response.write(str)
 
         
 class Set(webapp2.RequestHandler):
@@ -568,8 +531,7 @@ class Set(webapp2.RequestHandler):
                             pub = "f";
                         else: 
                             pub = p;  
-                            
-                    txt = c["txt"] 
+                            txt = c["txt"]
                     txt = txt.replace('\r\n','<br>')
                     txt = txt.replace('\n','<br>')
                     txt = txt.replace('\r','<br>')                
@@ -601,7 +563,7 @@ class Set(webapp2.RequestHandler):
                                 ccns_keys.append(c["key"])
                                 
                     else:
-                        ccn = Ccn(url=curl.key,usr=usrs,txt=txt,pub=pub,tag=tag)
+                        ccn = Ccn(url=curl.url,usr=usrs,txt=txt,pub=pub,tag=tag)
                         ccns.append(ccn)
                         ccns_keys.append(c["key"])                           
                           

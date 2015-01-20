@@ -148,7 +148,7 @@ class Cuser(CuserUtils,ndb.Model):
 
 class Curl(ndb.Model):
     ttl = ndb.StringProperty()
-        
+    url = ndb.StringProperty()     
         
 class Ccn(CcnUtils,ndb.Model):
     url = ndb.KeyProperty(Curl,indexed=True)

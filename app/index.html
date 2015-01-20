@@ -280,6 +280,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular.min.js"></script>
   <script>
   
+
+  
     var ccnsLen =  {{ccns|length }};
   	var ccns =[
   	{% for ccn in ccns %}{"url":"{{ccn.url.id}}","ttl":"{{ccn.url.ttl}}","usr":"{% for usr in ccn.usr %}{{usr}}{% if loop.index != loop.length %},{% endif %}{% endfor %}",  {% if ccn.pub != "a" %}  "txt":"{{ccn.txt}}" {% else %} "txt":"" {% endif %},"dat":"{{ ccn.dat |timeJST }}","pub":"{{ ccn.pub }}","key":"{{ccn.key}}","tag":"{% for tag in ccn.tag %}{{tag | tag2Name}}{% if loop.index != loop.length %},{% endif %}{% endfor %}"}  {% if loop.index != loop.length %},{% endif %}  {% endfor %}
